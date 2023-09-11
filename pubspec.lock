@@ -75,6 +75,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  input_form_field:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "version-0.0.6"
+      resolved-ref: "890c210532a8ce705c420df6742f941ce251c18e"
+      url: "git@github.com:momshaddinury/input_form_field.git"
+    source: git
+    version: "0.0.6"
   lints:
     dependency: transitive
     description:
@@ -186,3 +195,4 @@ packages:
     version: "0.1.4-beta"
 sdks:
   dart: ">=3.1.1 <4.0.0"
+  flutter: ">=1.17.0"

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'features/authentication/sign_in/presentation/pages/sign_in_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -9,9 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  null,// MyHomePage(),
+      theme: ThemeData(
+        scaffoldBackgroundColor:Colors.white,
+        fontFamily: 'DM Sans',
+      ),
+      home:  const SignInPage(),// MyHomePage(),
     );
   }
 }
