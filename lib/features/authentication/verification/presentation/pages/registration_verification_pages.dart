@@ -7,90 +7,35 @@ import '../../../../../core/constant/text_style.dart';
 import 'package:pinput/pinput.dart';
 import 'dart:async';
 
-class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key,required this.userEmail});
+class RegistrationVerificationPage extends StatefulWidget {
+  const RegistrationVerificationPage({super.key,required this.userEmail});
   final String userEmail;
 
   @override
-  State<VerificationPage> createState() => _VerificationPageState();
+  State<RegistrationVerificationPage> createState() => _RegistrationVerificationPageState();
 }
 
-class _VerificationPageState extends State<VerificationPage> {
+class _RegistrationVerificationPageState extends State<RegistrationVerificationPage> {
 
   final pinController = TextEditingController();
   final focusNode = FocusNode();
-  int _secondsRemaining = 60;
-  late Timer _timer;
 
   final _formKey = GlobalKey<FormState>();
   var pinCode = '';
   bool _isValid = false;
 
-  @override
-  void initState() {
-    super.initState();
-    startTimer();
-  }
-
-
-  void startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_secondsRemaining > 0) {
-          _secondsRemaining--;
-        } else {
-          _timer.cancel(); // Stop the timer when it reaches 0.
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel(); // Cancel the timer when the widget is disposed.
-    super.dispose();
-  }
-
-  void _saveForm(context,String pin) {
+  bool _saveForm(context,String pin) {
+    bool state = false;
     setState(() {
       _isValid = _formKey.currentState!.validate();
       if(_isValid == true){
-        _showMyDialog(context,pin);
+        state = true;
+     //   _showMyDialog(context,pin);
       }
     });
+    return state;
   }
 
-  Future<void> _showMyDialog(context, String pin) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('User Info'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Pin : ${pin.toString()}'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Reset',style: AppTextStyle.textStyleOne(Colors.black, 16.0, FontWeight.w600),),
-              onPressed: () {
-                setState(() {
-                  pinController.text = '';
-                  _timer.cancel();
-                  context.push('/update-new-password');
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,16 +49,6 @@ class _VerificationPageState extends State<VerificationPage> {
           toolbarHeight: 100,
           backgroundColor: Colors.white,
           elevation: 0,
-          leading: GestureDetector(
-            onTap: (){
-              context.pop();
-              HapticFeedback.mediumImpact();
-            },
-            child: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
-            ),
-          ),
         ),
         body: SafeArea(
             child: Padding(
@@ -154,7 +89,7 @@ class _VerificationPageState extends State<VerificationPage> {
                             child: Text(
                               'Change?',
                               style: AppTextStyle.textStyleOne(
-                                   Colors.blue, 14.0, FontWeight.w600),
+                                  Colors.blue, 14.0, FontWeight.w600),
                             ),
                           ),
                         ],
@@ -218,30 +153,14 @@ class _VerificationPageState extends State<VerificationPage> {
                       ),
 
                       const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                             Text(
-                              'Send reset code in',
-                              style: AppTextStyle.textStyleOne(Colors.grey, 14.0, FontWeight.w400),
-                            ),
-                            Text(
-                              '${_secondsRemaining ~/ 60}:${(_secondsRemaining % 60).toString().padLeft(2, '0')}',
-                              style: AppTextStyle.textStyleOne(Colors.grey, 14.0, FontWeight.w700),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
                         height: 60,
                       ),
                       InkWell(
                         onTap: () {
-                          _saveForm(context, pinController.text);
+                          bool state = _saveForm(context, pinController.text);
+                           if(state){
+                             context.push('/profile-and-password');
+                           }
                           HapticFeedback.mediumImpact();
                         },
                         child: Container(
@@ -259,7 +178,6 @@ class _VerificationPageState extends State<VerificationPage> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
