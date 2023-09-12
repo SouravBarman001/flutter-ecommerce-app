@@ -123,7 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 20,
                       ),
                       Text(
-                        'Enter Email to register',
+                        'Enter email to register',
                         style: AppTextStyle.textStyleOne(
                             const Color(0xff838589), 15.0, FontWeight.w400),
                       ),
@@ -187,7 +187,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         onTap: (){
                           bool state = _saveForm(context, _textEditingControllerOne.text);
                           if(state){
-                            context.push('/verification/${_textEditingControllerOne.text}');
+                            context.push('/reg-verification/${_textEditingControllerOne.text}');
                           }
                           HapticFeedback.mediumImpact();
 
