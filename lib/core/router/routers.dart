@@ -11,5 +11,8 @@ class RoutersName{
   static String signUp = 'sign-up';
   static String reset = 'reset';
   static String verification = 'verification';
+  static String regVerification = 'reg-verification';
+  static String updateNewPassword = 'update-new-password';
+  static String profileAndPassword = 'profile-and-password';
 
 }

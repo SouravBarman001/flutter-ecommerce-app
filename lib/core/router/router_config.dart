@@ -1,6 +1,9 @@
 import 'package:ecommerce_module/core/router/routers.dart';
+import 'package:ecommerce_module/features/authentication/profile_and_password/presentation/pages/profile_and_password_page.dart';
 import 'package:ecommerce_module/features/authentication/reset_password/presentation/pages/reset_password_page.dart';
 import 'package:ecommerce_module/features/authentication/sign_in/presentation/pages/sign_in_page.dart';
+import 'package:ecommerce_module/features/authentication/update_password/presentation/pages/update_password_page.dart';
+import 'package:ecommerce_module/features/authentication/verification/presentation/pages/registration_verification_pages.dart';
 import 'package:ecommerce_module/features/authentication/sign_up/presentation/pages/sign_up_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,9 +37,32 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         GoRoute(
           path: '/verification/:name',
           name: RoutersName.verification,
-          builder: (context, state){
+          builder: (context, state) {
             final name = state.pathParameters['name']!;
-            return VerificationPage(key: state.pageKey,userEmail:name);
+            return VerificationPage(key: state.pageKey, userEmail: name);
+          },
+        ),
+        GoRoute(
+          path: '/reg-verification/:email',
+          name: RoutersName.regVerification,
+          builder: (context, state) {
+            final email = state.pathParameters['email']!;
+            return RegistrationVerificationPage(
+                key: state.pageKey, userEmail: email);
+          },
+        ),
+        GoRoute(
+          path: '/update-new-password',
+          name: RoutersName.updateNewPassword,
+          builder: (context, state) {
+            return UpdatePasswordPage(key: state.pageKey);
+          },
+        ),
+        GoRoute(
+          path: '/profile-and-password',
+          name: RoutersName.profileAndPassword,
+          builder: (context, state) {
+            return ProfileAndPassword(key: state.pageKey);
           },
         ),
       ]);
