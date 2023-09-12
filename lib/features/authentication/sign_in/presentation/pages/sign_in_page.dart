@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:input_form_field/input_form_field.dart';
 import '../../../../../core/constant/media_query_size.dart';
 import '../../../../../core/constant/text_style.dart';
@@ -44,7 +46,7 @@ class _SignInPageState extends State<SignInPage> {
             child: ListBody(
               children: <Widget>[
                 Text('Gmail : ${gmail.toString()}'),
-                Text('Gmail : ${password.toString()}'),
+                Text('Pass : ${password.toString()}'),
               ],
             ),
           ),
@@ -89,8 +91,14 @@ class _SignInPageState extends State<SignInPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Forgot Password',style: AppTextStyle.smallTextOne,),
-              Text('Sign Up',style: AppTextStyle.textStyleOne(Colors.blue, 14.0, FontWeight.w500),),
+              GestureDetector(onTap: (){
+                context.push('/reset');
+                HapticFeedback.mediumImpact();
+              },child: Text('Forgot Password',style: AppTextStyle.textStyleOne(Colors.black, 15.0, FontWeight.w500),)),
+              GestureDetector(onTap: (){
+                context.push('/signup');
+                HapticFeedback.mediumImpact();
+              },child: Text('Sign Up',style: AppTextStyle.textStyleOne(Colors.blue, 15.0, FontWeight.w500),)),
             ],
           ),
         ),
@@ -136,15 +144,14 @@ class _SignInPageState extends State<SignInPage> {
                     borderRadius: BorderRadius.circular(10),
                     fillColor: const Color(0xfffafafa),
                     textEditingController: _textEditingControllerOne,
-                    validator: (value) {
+                    validator: (val) {
                       // Check if this field is empty
+                      var value = val?.toLowerCase().trimRight();
                       if (value == null || value.isEmpty) {
                         return 'This field is required';
                       }
                       // using regular expression
-                      else if(value.length > 35){
-                        return 'Email must be less than 35 characters';
-                      }else{
+                      else{
                         if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
                           return "Please enter a valid email address";
                         }else{
@@ -153,7 +160,7 @@ class _SignInPageState extends State<SignInPage> {
                       }
 
                       // the email is valid
-                      return null;
+                      // return null;
                     },
                         hintTextStyle: AppTextStyle.textStyleOne(
                             const Color(0xffC4C5C4), 14.0, FontWeight.w400),
@@ -183,9 +190,7 @@ class _SignInPageState extends State<SignInPage> {
                         RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
                         if (value == null || value.isEmpty) {
                           return 'Please enter password';
-                        } else if(value.length > 13){
-                          return 'Password must be less than 12 characters';
-                        }else{
+                        } else{
                           if (!regex.hasMatch(value)) {
                             return 'Enter strong password with a minimum of 8 characters';
                           } else {
@@ -203,6 +208,7 @@ class _SignInPageState extends State<SignInPage> {
                         setState(() {
                           passwordVisible = !passwordVisible;
                         });
+                        HapticFeedback.mediumImpact();
                       },child: passwordVisible == false ? const Icon( Icons.remove_red_eye_outlined,color:Color(0xff838589)) : const Icon(Icons.remove_red_eye,color: Colors.black,)),
 
                   ),
@@ -221,6 +227,7 @@ class _SignInPageState extends State<SignInPage> {
                   ) : InkWell(
                     onTap: (){
                       _saveForm(context,_textEditingControllerOne.text,_textEditingControllerTwo.text);
+                      HapticFeedback.mediumImpact();
                     },
                     child: Container(
                       alignment: Alignment.center,
