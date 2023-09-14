@@ -40,6 +40,7 @@ dependencies:
   dartz:
   shimmer:
   hive:
+  carousel_slider:
   hive_flutter:
   go_router: ^7.0.0
   input_form_field:
@@ -47,6 +48,9 @@ dependencies:
       url: git@github.com:momshaddinury/input_form_field.git
       ref: version-0.0.6
   pinput: ^3.0.1
+  badges: ^3.1.2
+  cached_network_image: ^3.2.3
+
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +80,9 @@ flutter:
   assets:
     - images/
     - images/icons/
+    - images/home_page_icons/
+    - images/home_page_icons/category_icons/
+    - images/banner/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
