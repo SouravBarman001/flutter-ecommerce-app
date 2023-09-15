@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../core/constant/text_style.dart';
+import '../../../../../core/constant/text_style.dart';
 
-class BestSellers extends StatefulWidget {
-   BestSellers({super.key,required this.featuredItems});
-   Map featuredItems;
+class NewArrival extends StatefulWidget {
+   NewArrival({super.key,required this.featuredItems});
+  Map featuredItems;
 
   @override
-  State<BestSellers> createState() => _BestSellersState();
+  State<NewArrival> createState() => _NewArrivalState();
 }
 
-class _BestSellersState extends State<BestSellers> {
+class _NewArrivalState extends State<NewArrival> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,7 +28,7 @@ class _BestSellersState extends State<BestSellers> {
           child:ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child:
-            Image.network('https://graphicsfamily.com/wp-content/uploads/edd/2022/12/E-commerce-Product-Banner-Design-scaled.jpg', fit: BoxFit.cover),),
+            Image.network('https://mir-s3-cdn-cf.behance.net/project_modules/disp/ba082b144831311.6293af8f7a9d8.png', fit: BoxFit.cover),),
         ),
         const SizedBox(
           height: 20,
@@ -37,7 +37,7 @@ class _BestSellersState extends State<BestSellers> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Best Sellers',
+              'New Arrivals',
               style: AppTextStyle.textStyleOne(
                   Colors.black, 16.0, FontWeight.w600),
             ),
@@ -58,7 +58,7 @@ class _BestSellersState extends State<BestSellers> {
           width: double.infinity,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: widget.featuredItems.length,
+            itemCount:widget.featuredItems.length,
             itemBuilder: (BuildContext context, int index) {
               final entry = widget.featuredItems.entries.elementAt(index);
               final key = entry.key;

@@ -4,10 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:input_form_field/input_form_field.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
+import '../../data/domain/FeaturedProductModel.dart';
 import 'best_sellers.dart';
 import 'new_arrival.dart';
 
@@ -167,7 +168,9 @@ class _HomePageState extends State<HomePage> {
                           vertical: 18, horizontal: 15),
                       suffix: GestureDetector(
                           onTap: () {
-                            setState(() {});
+                            setState(() {
+                              context.push('/home/search-product');
+                            });
                             HapticFeedback.mediumImpact();
                           },
                           child: const Icon(
@@ -305,13 +308,15 @@ class _HomePageState extends State<HomePage> {
                       width: double.infinity,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: featuredItems.length,
+                        itemCount: FeaturedProductModel.listItems.length,
                         itemBuilder: (BuildContext context, int index) {
-                          final entry = featuredItems.entries.elementAt(index);
-                          final key = entry.key;
-                          final value = entry.value;
+                          final entry = FeaturedProductModel.listItems[index];
                           return GestureDetector(
-                            onTap: () => HapticFeedback.heavyImpact(),
+                            onTap: (){
+                              HapticFeedback.heavyImpact();
+                              context.push('/product-details', extra: entry);
+
+                            },
                             child: Container(
                               height: 242,
                               width: 156,
@@ -333,9 +338,10 @@ class _HomePageState extends State<HomePage> {
                                         width: double.infinity,
                                           child: ClipRRect(
                                             borderRadius: BorderRadius.circular(10),
-                                            child: Image.network(value,
+                                            child: Image.network(entry.imgUrl.toString(),
                                                 fit: BoxFit.cover),
-                                          ))),
+                                          ),
+                                      )),
                                   Expanded(
                                       child: Container(
                                           padding: const EdgeInsets.only(top: 5,left: 10,right: 10,bottom: 5),
@@ -346,25 +352,25 @@ class _HomePageState extends State<HomePage> {
                                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: [
                                               Text(
-                                                key.toString(),
+                                                entry.name.toString(),
                                                 style: AppTextStyle.textStyleOne(Colors.black, 14.0, FontWeight.w600),
                                               ),
                                               Text(
                                                 "Rp. 1.500.000",
                                                 style: AppTextStyle.textStyleOne(const Color(0xffFE3A30), 14.0, FontWeight.w700),
                                               ),
-                                              const Row(
+                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Flexible( flex: 2, child:Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     children: [
-                                                      Icon(Icons.star,color: Color(0xffFFC120),size: 15,),
-                                                      Text('4.5',style: TextStyle(fontSize: 10),)
+                                                      const Icon(Icons.star,color: Color(0xffFFC120),size: 15,),
+                                                      Text(entry.rating.toString(),style: const TextStyle(fontSize: 10),)
                                                     ],
                                                   )),
-                                                  Flexible( flex: 3,child:  Text('86 Reviews',style: TextStyle(fontSize: 10),)),
-                                                  Flexible(flex: 2,child:  Icon(Icons.more_vert_outlined,color: Color(0xffFFC120),size: 15,)),
+                                                  Flexible( flex: 3,child:  Text('${entry.review.toString()} Reviews',style: const TextStyle(fontSize: 10),)),
+                                                  const Flexible(flex: 2,child:  Icon(Icons.more_vert_outlined,color: Color(0xffFFC120),size: 15,)),
                                                 ],
                                               ),
                                             ],

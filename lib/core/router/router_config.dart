@@ -5,11 +5,15 @@ import 'package:ecommerce_module/features/authentication/sign_in/presentation/pa
 import 'package:ecommerce_module/features/authentication/update_password/presentation/pages/update_password_page.dart';
 import 'package:ecommerce_module/features/authentication/verification/presentation/pages/registration_verification_pages.dart';
 import 'package:ecommerce_module/features/authentication/sign_up/presentation/pages/sign_up_page.dart';
+import 'package:ecommerce_module/features/home/search_product/presentation/pages/search_product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/authentication/verification/presentation/pages/verification_page.dart';
+import '../../features/home/home_core/data/domain/FeaturedProductModel.dart';
+import '../../features/home/home_core/presentation/pages/home_page.dart';
+import '../../features/home/home_core/presentation/pages/product_details.dart';
 
 final GlobalKey<NavigatorState> _rootState = GlobalKey(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellState = GlobalKey(debugLabel: 'shell');
@@ -63,6 +67,30 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           name: RoutersName.profileAndPassword,
           builder: (context, state) {
             return ProfileAndPassword(key: state.pageKey);
+          },
+        ),
+        GoRoute(
+          path: '/home',
+          name: RoutersName.home,
+          builder: (context, state) {
+            return HomePage(key: state.pageKey);
+          },
+          routes:<RouteBase>[
+        GoRoute(
+        name: RoutersName.searchProduct,
+            path: 'search-product',
+            builder:(BuildContext context, state) {
+              return SearchProduct(key: state.pageKey);
+            }
+        ),
+      ]
+        ),
+        GoRoute(
+          path: '/product-details',
+          name: RoutersName.productDetails,
+          builder: (context, state) {
+            FeaturedProductModel data = state.extra as FeaturedProductModel;
+              return ProductDetails(key: state.pageKey, data: data, );
           },
         ),
       ]);
