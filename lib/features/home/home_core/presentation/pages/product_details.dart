@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:badges/badges.dart' as badges;
 
-import '../../../../core/constant/media_query_size.dart';
-import '../../../../core/constant/text_style.dart';
-import '../../../../core/router/routers.dart';
+import '../../../../../core/constant/media_query_size.dart';
+import '../../../../../core/constant/text_style.dart';
+import '../../../../../core/router/routers.dart';
 import '../../data/domain/FeaturedProductModel.dart';
 
 class ProductDetails extends StatefulWidget {
