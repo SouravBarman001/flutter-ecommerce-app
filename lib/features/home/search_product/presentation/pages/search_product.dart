@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -141,7 +142,7 @@ class _SearchProductState extends State<SearchProduct> {
                                   });
                                 },
                                 child: const Icon(
-                                  Icons.search,
+                                  CupertinoIcons.search,
                                   color: Colors.black,
                                   size: 28,
                                 ),
