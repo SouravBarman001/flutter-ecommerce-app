@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../core/constant/text_style.dart';
-
+@immutable
 class BestSellers extends StatefulWidget {
-   BestSellers({super.key,required this.featuredItems});
-   Map featuredItems;
+  const BestSellers({super.key, required this.featuredItems});
+  final Map featuredItems;
 
   @override
   State<BestSellers> createState() => _BestSellersState();
@@ -25,10 +25,12 @@ class _BestSellersState extends State<BestSellers> {
           ),
           //padding: EdgeInsets.only(left: 15,top: 5),
 
-          child:ClipRRect(
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child:
-            Image.network('https://graphicsfamily.com/wp-content/uploads/edd/2022/12/E-commerce-Product-Banner-Design-scaled.jpg', fit: BoxFit.cover),),
+            child: Image.network(
+                'https://graphicsfamily.com/wp-content/uploads/edd/2022/12/E-commerce-Product-Banner-Design-scaled.jpg',
+                fit: BoxFit.cover,),
+          ),
         ),
         const SizedBox(
           height: 20,
@@ -39,12 +41,18 @@ class _BestSellersState extends State<BestSellers> {
             Text(
               'Best Sellers',
               style: AppTextStyle.textStyleOne(
-                  Colors.black, 16.0, FontWeight.w600),
+                Colors.black,
+                16.0,
+                FontWeight.w600,
+              ),
             ),
             Text(
               'See All',
               style: AppTextStyle.textStyleOne(
-                  Colors.blue, 16.0, FontWeight.w600),
+                Colors.blue,
+                16.0,
+                FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -52,7 +60,7 @@ class _BestSellersState extends State<BestSellers> {
           height: 10,
         ),
         Container(
-          margin: const EdgeInsets.only(top: 15,bottom: 15),
+          margin: const EdgeInsets.only(top: 15, bottom: 15),
           height: 250,
           // color: Colors.lightGreen,
           width: double.infinity,
@@ -71,57 +79,91 @@ class _BestSellersState extends State<BestSellers> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
-
                   ),
                   alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.only(top: 5, right: 5,left: 5,bottom: 5),
+                  margin: const EdgeInsets.only(
+                      top: 5, right: 5, left: 5, bottom: 5,),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Display the key
                       Expanded(
-                          flex: 2,
-                          child: SizedBox(
-                              width: double.infinity,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(value,
-                                    fit: BoxFit.cover),
-                              ))),
+                        flex: 2,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              value,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
                       Expanded(
-                          child: Container(
-                              padding: const EdgeInsets.only(top: 5,left: 10,right: 10,bottom: 5),
-                              width: double.infinity,
-                              //    color: Colors.grey,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                              top: 5, left: 10, right: 10, bottom: 5,),
+                          width: double.infinity,
+                          //    color: Colors.grey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                key.toString(),
+                                style: AppTextStyle.textStyleOne(
+                                    Colors.black, 14.0, FontWeight.w600,),
+                              ),
+                              Text(
+                                'Rp. 1.500.000',
+                                style: AppTextStyle.textStyleOne(
+                                    const Color(0xffFE3A30),
+                                    14.0,
+                                    FontWeight.w700,),
+                              ),
+                              const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    key.toString(),
-                                    style: AppTextStyle.textStyleOne(Colors.black, 14.0, FontWeight.w600),
+                                  Flexible(
+                                    flex: 2,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Color(0xffFFC120),
+                                          size: 15,
+                                        ),
+                                        Text(
+                                          '4.5',
+                                          style: TextStyle(fontSize: 10),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Text(
-                                    "Rp. 1.500.000",
-                                    style: AppTextStyle.textStyleOne(const Color(0xffFE3A30), 14.0, FontWeight.w700),
-                                  ),
-                                  const Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Flexible( flex: 2, child:Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Icon(Icons.star,color: Color(0xffFFC120),size: 15,),
-                                          Text('4.5',style: TextStyle(fontSize: 10),)
-                                        ],
-                                      )),
-                                      Flexible( flex: 3,child:  Text('86 Reviews',style: TextStyle(fontSize: 10),)),
-                                      Flexible(flex: 2,child:  Icon(Icons.more_vert_outlined,color: Color(0xffFFC120),size: 15,)),
-                                    ],
-                                  ),
+                                  Flexible(
+                                      flex: 3,
+                                      child: Text(
+                                        '86 Reviews',
+                                        style: TextStyle(fontSize: 10),
+                                      ),),
+                                  Flexible(
+                                      flex: 2,
+                                      child: Icon(
+                                        Icons.more_vert_outlined,
+                                        color: Color(0xffFFC120),
+                                        size: 15,
+                                      ),),
                                 ],
-                              ))), // Display the corresponding image
+                              ),
+                            ],
+                          ),
+                        ),
+                      ), // Display the corresponding image
                     ],
                   ),
                 ),

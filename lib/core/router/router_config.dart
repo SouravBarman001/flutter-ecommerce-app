@@ -11,12 +11,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/authentication/verification/presentation/pages/verification_page.dart';
-import '../../features/home/home_core/data/domain/FeaturedProductModel.dart';
+import '../../features/home/home_core/data/domain/featured_product_model.dart';
 import '../../features/home/home_core/presentation/pages/home_page.dart';
 import '../../features/home/home_core/presentation/pages/product_details.dart';
 
 final GlobalKey<NavigatorState> _rootState = GlobalKey(debugLabel: 'root');
-final GlobalKey<NavigatorState> _shellState = GlobalKey(debugLabel: 'shell');
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -52,7 +51,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           builder: (context, state) {
             final email = state.pathParameters['email']!;
             return RegistrationVerificationPage(
-                key: state.pageKey, userEmail: email);
+                key: state.pageKey, userEmail: email,);
           },
         ),
         GoRoute(
@@ -81,17 +80,18 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             path: 'search-product',
             builder:(BuildContext context, state) {
               return SearchProduct(key: state.pageKey);
-            }
+            },
         ),
-      ]
+      ],
         ),
         GoRoute(
           path: '/product-details',
           name: RoutersName.productDetails,
           builder: (context, state) {
-            FeaturedProductModel data = state.extra as FeaturedProductModel;
+            // ignore: lines_longer_than_80_chars
+            final FeaturedProductModel data = state.extra as FeaturedProductModel;
               return ProductDetails(key: state.pageKey, data: data, );
           },
         ),
-      ]);
+      ],);
 });

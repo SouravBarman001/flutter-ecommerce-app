@@ -6,11 +6,12 @@ import 'package:badges/badges.dart' as badges;
 import '../../../../../core/constant/media_query_size.dart';
 import '../../../../../core/constant/text_style.dart';
 import '../../../../../core/router/routers.dart';
-import '../../data/domain/FeaturedProductModel.dart';
+import '../../data/domain/featured_product_model.dart';
 
+@immutable
 class ProductDetails extends StatefulWidget {
-  ProductDetails({super.key, required this.data});
-  FeaturedProductModel data;
+  const ProductDetails({super.key, required this.data});
+  final FeaturedProductModel data;
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -30,20 +31,22 @@ class _ProductDetailsState extends State<ProductDetails> {
         backgroundColor: Colors.white,
         actions: [
           Expanded(
-              flex: 1,
-              child: Container(
-                padding: const EdgeInsets.only(left: 10),
-                alignment: Alignment.centerLeft,
-                child: InkWell(
-                    onTap: () {
-                      HapticFeedback.vibrate();
-                      context.goNamed(RoutersName.home);
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.black,
-                    )),
-              )),
+            flex: 1,
+            child: Container(
+              padding: const EdgeInsets.only(left: 10),
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () {
+                  HapticFeedback.vibrate();
+                  context.goNamed(RoutersName.home);
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
           Expanded(
             flex: 1,
             child: Container(
@@ -51,14 +54,16 @@ class _ProductDetailsState extends State<ProductDetails> {
               child: Text(
                 'Detail Product',
                 style: AppTextStyle.textStyleOne(
-                    const Color(0xff000000), 18.0, FontWeight.w700),
+                  const Color(0xff000000),
+                  18.0,
+                  FontWeight.w700,
+                ),
               ),
             ),
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              //color: Colors.greenAccent,
+            child: SizedBox(
               child: Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Row(
@@ -129,77 +134,92 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(widget.data.imgUrl.toString(),
-                        fit: BoxFit.cover),
+                    child: Image.network(
+                      widget.data.imgUrl.toString(),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 Container(
-                    padding:
-                        const EdgeInsets.only(left: 5, right: 10, bottom: 5),
-                    height: 120,
-                    width: double.infinity,
-                    // color: Colors.grey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          widget.data.name.toString(),
-                          style: AppTextStyle.textStyleOne(
-                              Colors.black, 24.0, FontWeight.w700),
+                  padding: const EdgeInsets.only(left: 5, right: 10, bottom: 5),
+                  height: 120,
+                  width: double.infinity,
+                  // color: Colors.grey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        widget.data.name.toString(),
+                        style: AppTextStyle.textStyleOne(
+                          Colors.black,
+                          24.0,
+                          FontWeight.w700,
                         ),
-                        Text(
-                          "Rp. 1.500.000",
-                          style: AppTextStyle.textStyleOne(
-                              const Color(0xffFE3A30), 16.0, FontWeight.w600),
+                      ),
+                      Text(
+                        'Rp. 1.500.000',
+                        style: AppTextStyle.textStyleOne(
+                          const Color(0xffFE3A30),
+                          16.0,
+                          FontWeight.w600,
                         ),
-                        Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                                flex: 1,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(
-                                      Icons.star,
-                                      color: Color(0xffFFC120),
-                                      size: 18,
-                                    ),
-                                    Text(
-                                      widget.data.rating.toString(),
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400),
-                                    )
-                                  ],
-                                )),
-                            Expanded(
-                                flex: 2,
-                                child: Text(
-                                  '${widget.data.review.toString()} Reviews',
+                      ),
+                      Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  color: Color(0xffFFC120),
+                                  size: 18,
+                                ),
+                                Text(
+                                  widget.data.rating.toString(),
                                   style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400),
-                                )),
-                            Expanded(
-                                flex: 4,
-                                child: Container(
-                                    alignment: Alignment.topRight,
-                                    child: Text(
-                                      'Available : 250',
-                                      style: AppTextStyle.textStyleOne(
-                                          const Color(0xff3A9B7A),
-                                          12,
-                                          FontWeight.w600),
-                                    ))),
-                          ],
-                        ),
-                      ],
-                    )),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              '${widget.data.review.toString()} Reviews',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Container(
+                              alignment: Alignment.topRight,
+                              child: Text(
+                                'Available : 250',
+                                style: AppTextStyle.textStyleOne(
+                                  const Color(0xff3A9B7A),
+                                  12,
+                                  FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(
                   height: 5,
                 ),
@@ -215,7 +235,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                   // color: Colors.lightGreen, //   const Color(0xfffafafa),
+                    // color: Colors.lightGreen, //   const Color(0xfffafafa),
                   ),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -228,7 +248,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: const Color(
-                              0xfffafafa), //   const Color(0xfffafafa),
+                            0xfffafafa,
+                          ), //   const Color(0xfffafafa),
                         ),
                         child: Image.asset(
                           'images/home_page_icons/bell.png',
@@ -245,7 +266,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Text(
                             'Shop Larson Electronic',
                             style: AppTextStyle.textStyleOne(
-                                Colors.black, 14, FontWeight.w600),
+                              Colors.black,
+                              14,
+                              FontWeight.w600,
+                            ),
                           ),
                           const SizedBox(
                             height: 5,
@@ -253,48 +277,79 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Text(
                             'Official Store',
                             style: AppTextStyle.textStyleOne(
-                                Colors.black, 12, FontWeight.w400),
-                          )
+                              Colors.black,
+                              12,
+                              FontWeight.w400,
+                            ),
+                          ),
                         ],
                       ),
                       Flexible(
-                          child: Container(
-                           // color: Colors.red,
-                        padding: const EdgeInsets.only(right:10),
-                        alignment: Alignment.centerRight,
-                        child: const Icon(Icons.arrow_forward_ios),
-                      ))
+                        child: Container(
+                          // color: Colors.red,
+                          padding: const EdgeInsets.only(right: 10),
+                          alignment: Alignment.centerRight,
+                          child: const Icon(Icons.arrow_forward_ios),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-
                 Divider(
                   color: Colors.grey.shade300,
                   thickness: 1,
                 ),
-
                 const SizedBox(
                   height: 15,
                 ),
-                
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Description Product',style: AppTextStyle.textStyleOne(Colors.black, 16, FontWeight.w700),),
+                    Text(
+                      'Description Product',
+                      style: AppTextStyle.textStyleOne(
+                        Colors.black,
+                        16,
+                        FontWeight.w700,
+                      ),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
-                    Text('The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers. ',style: AppTextStyle.textStyleOne(Colors.black, 14, FontWeight.w400),),
-                    const SizedBox(height: 15,),
-                    Text('The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers.  ',style: AppTextStyle.textStyleOne(Colors.black, 14, FontWeight.w400),),
-
-
+                    Text(
+                      'The speaker unit contains a diaphragm that is '
+                          'precision-grown from NAC Audio bio-cellulose, '
+                          'making it stiffer, lighter and stronger than'
+                          ' regular PET speaker units, and allowing the'
+                          ' sound-producing diaphragm to vibrate without '
+                          'the levels of distortion found in other speakers. ',
+                      style: AppTextStyle.textStyleOne(
+                        Colors.black,
+                        14,
+                        FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'The speaker unit contains a diaphragm that is '
+                          'precision-grown from NAC Audio bio-cellulose, '
+                          'making it stiffer, lighter and stronger'
+                          ' than regular PET speaker units, and allowing '
+                          'the sound-producing diaphragm to vibrate without'
+                          ' the levels of distortion found in other speakers.',
+                      style: AppTextStyle.textStyleOne(
+                        Colors.black,
+                        14,
+                        FontWeight.w400,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                
               ],
             ),
           ),

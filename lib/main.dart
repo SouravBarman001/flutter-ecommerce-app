@@ -1,8 +1,6 @@
 import 'package:ecommerce_module/core/router/router_config.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'features/authentication/sign_in/presentation/pages/sign_in_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
