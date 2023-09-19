@@ -302,6 +302,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      sha256: "8cf100b8e4973dc570b6415a2090b0bfaa8756ad333db46939efc3e774ee100d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.9.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -320,6 +328,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  getwidget:
+    dependency: "direct main"
+    description:
+      name: getwidget
+      sha256: "91df14a8d80e21f3ec02759295b90cc8badb8a872b90d34ad4aeb4085d833b5c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   glob:
     dependency: transitive
     description:
@@ -401,6 +417,14 @@ packages:
       url: "git@github.com:momshaddinury/input_form_field.git"
     source: git
     version: "0.0.6"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
   io:
     dependency: transitive
     description:
@@ -734,6 +758,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: aea119c8117953fa5decf4a313b431e556b0959cd35ff88f8fbdc0eda9bedb06
+      url: "https://pub.dev"
+    source: hosted
+    version: "23.1.36"
+  syncfusion_flutter_sliders:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_sliders
+      sha256: "03efbc624ca881873b6bfb67048741c03a093c73729cbe83bee7007fc7897c8f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "23.1.36"
   synchronized:
     dependency: transitive
     description:
@@ -848,4 +888,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.1.1 <4.0.0"
-  flutter: ">=3.7.0"
+  flutter: ">=3.10.0"
