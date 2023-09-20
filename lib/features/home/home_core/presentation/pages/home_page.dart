@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/home/home_core/presentation/widgets/category_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
@@ -41,10 +42,35 @@ class _HomePageState extends State<HomePage> {
         'https://img.pixelz.com/blog/white-background-photography/product-photo-liqueur-bottle-1000.jpg',
   };
 
+  void _showAlertDialog(BuildContext context){
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+        insetPadding: const EdgeInsets.all(0.0),
+        contentPadding: const EdgeInsets.all(0.0),
+        content: SizedBox(
+          width: MediaQuery.of(context).size.width - 50,
+          child: CategoryDialog(
+            ctx: ctx,
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+       FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         appBar: AppBar(
           elevation: 0.6,
@@ -228,12 +254,18 @@ class _HomePageState extends State<HomePage> {
                             FontWeight.w600,
                           ),
                         ),
-                        Text(
-                          'See All',
-                          style: AppTextStyle.textStyleOne(
-                            Colors.blue,
-                            16.0,
-                            FontWeight.w600,
+                        GestureDetector(
+                          onTap: (){
+                            HapticFeedback.mediumImpact();
+                            _showAlertDialog(context);
+                          },
+                          child: Text(
+                            'See All',
+                            style: AppTextStyle.textStyleOne(
+                              Colors.blue,
+                              16.0,
+                              FontWeight.w600,
+                            ),
                           ),
                         ),
                       ],
@@ -252,7 +284,11 @@ class _HomePageState extends State<HomePage> {
                           final key = entry.key;
                           final value = entry.value;
                           return GestureDetector(
-                            onTap: () => HapticFeedback.heavyImpact(),
+                            onTap: (){
+                              HapticFeedback.heavyImpact();
+                              context.go('/home/category-details/$key');
+
+                            },
                             child: Container(
                               height: 80,
                               width: 80,
