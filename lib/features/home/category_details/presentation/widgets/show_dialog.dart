@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getwidget/components/checkbox/gf_checkbox.dart';
-import 'package:getwidget/size/gf_size.dart';
 import 'package:getwidget/types/gf_checkbox_type.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../../../../../core/constant/text_style.dart';
 
 class ShowDialogWidget extends StatefulWidget {
@@ -15,7 +13,8 @@ class ShowDialogWidget extends StatefulWidget {
   State<ShowDialogWidget> createState() => _ShowDialogWidgetState();
 }
 
-class _ShowDialogWidgetState extends State<ShowDialogWidget> {
+class _ShowDialogWidgetState extends State<ShowDialogWidget>
+    with SingleTickerProviderStateMixin {
   double start = 50.0; // Initial value for the left thumb
   double end = 100.0; // Initial value for the right thumb
   bool isCheckedOne = false;
@@ -26,12 +25,11 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
   bool checkTwo = false;
   bool checkThree = false;
   bool checkFour = false;
-
+   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+
     return DefaultTabController(
       length: 2,
       child: Container(
@@ -71,17 +69,23 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                   Container(
                     height: 50,
                     width: 160,
-                    child: const TabBar(
-                      labelPadding: EdgeInsets.only(left: 0, right: 18),
+                    child: TabBar(
+                      onTap: (tab) {
+                        print('tab $tab');
+                        setState(() {
+                          _selectedIndex = tab;
+                        });
+                      },
+                      labelPadding: const EdgeInsets.only(left: 0, right: 18),
                       isScrollable: true,
                       indicatorWeight: 3,
                       indicatorSize: TabBarIndicatorSize.label,
                       labelColor: Colors.black,
                       tabs: [
-                        Tab(
+                        const Tab(
                           text: 'Filter',
                         ),
-                        Tab(
+                        const Tab(
                           text: 'Sorting',
                         ),
                       ],
@@ -133,15 +137,15 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                                   RangeLabels(start.toString(), end.toString()),
                               onChanged: (value) {
                                 setState(() {
-                                  final double rangeDifference = value.end - value.start;
+                                  final double rangeDifference =
+                                      value.end - value.start;
                                   print('Range Difference: $rangeDifference');
                                   start = value.start;
                                   end = value.end;
                                 });
                               },
                               min: 10.0,
-                              max:
-                                  150.0, // Set max to 150 to allow
+                              max: 150.0, // Set max to 150 to allow
                               // a range of 50 to 100
                             ),
                           ),
@@ -149,8 +153,6 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                         const SizedBox(
                           height: 18,
                         ),
-
-
                         SizedBox(
                           width: double.infinity,
                           child: Row(
@@ -175,25 +177,29 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         const Divider(
                           thickness: 0.2,
                           color: Colors.black54,
                         ),
-                        const SizedBox(height: 10,),
-
-
+                        const SizedBox(
+                          height: 10,
+                        ),
                         SizedBox(
                           width: double.infinity,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('All Sub Categories',
+                              Text(
+                                'All Sub Categories',
                                 style: AppTextStyle.textStyleOne(
                                   Colors.black,
                                   14,
                                   FontWeight.w600,
-                                ),),
+                                ),
+                              ),
                               GFCheckbox(
                                 size: 23,
                                 activeBgColor: Colors.red,
@@ -215,24 +221,29 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         const Divider(
                           thickness: 0.2,
                           color: Colors.black54,
                         ),
-
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         SizedBox(
                           width: double.infinity,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Hand-phone',
+                              Text(
+                                'Hand-phone',
                                 style: AppTextStyle.textStyleOne(
                                   Colors.black,
                                   14,
                                   FontWeight.w600,
-                                ),),
+                                ),
+                              ),
                               GFCheckbox(
                                 size: 23,
                                 activeBgColor: Colors.red,
@@ -254,24 +265,29 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         const Divider(
                           thickness: 0.2,
                           color: Colors.black54,
                         ),
-
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         SizedBox(
                           width: double.infinity,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Computer',
+                              Text(
+                                'Computer',
                                 style: AppTextStyle.textStyleOne(
                                   Colors.black,
                                   14,
                                   FontWeight.w600,
-                                ),),
+                                ),
+                              ),
                               GFCheckbox(
                                 size: 23,
                                 activeBgColor: Colors.red,
@@ -293,8 +309,9 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
-
+                        const SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
                   ),
@@ -310,154 +327,172 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                           color: Colors.black54,
                         ),
 
-                        const SizedBox(height: 10,),
+                        // const SizedBox(height: 10,),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             HapticFeedback.mediumImpact();
-                             setState(() {
-                               checkOne = !checkOne;
-                             });
-
+                            setState(() {
+                              checkOne = !checkOne;
+                            });
                           },
-                          child: SizedBox(
+                          child: Container(
+                            height: 40,
+                            color: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             width: double.infinity,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Name (A-Z)',
+                                Text(
+                                  'Name (A-Z)',
                                   style: AppTextStyle.textStyleOne(
                                     Colors.black,
                                     14,
                                     FontWeight.w600,
-                                  ),),
-                                checkOne ? SizedBox(
-                                  height:29,
-                                   width : 29,
-                                  child: ClipOval(
-                                    child: Image.asset('images/icons/tick.png'),
                                   ),
-                                ) : const SizedBox(),
+                                ),
+                                checkOne
+                                    ? SizedBox(
+                                        height: 29,
+                                        width: 29,
+                                        child: ClipOval(
+                                          child: Image.asset(
+                                              'images/icons/tick.png',),
+                                        ),
+                                      )
+                                    : const SizedBox(),
                               ],
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10,),
+                        // const SizedBox(height: 10,),
                         const Divider(
                           thickness: 0.2,
                           color: Colors.black54,
                         ),
 
-
-
-                        const SizedBox(height: 10,),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             HapticFeedback.mediumImpact();
                             setState(() {
                               checkTwo = !checkTwo;
                             });
-
                           },
-                          child: SizedBox(
+                          child: Container(
+                            height: 40,
+                            color: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             width: double.infinity,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Name (Z-A)',
+                                Text(
+                                  'Name (Z-A)',
                                   style: AppTextStyle.textStyleOne(
                                     Colors.black,
                                     14,
                                     FontWeight.w600,
-                                  ),),
-                                checkTwo ? SizedBox(
-                                  height:29,
-                                  width :29,
-                                  child: ClipOval(
-                                    child: Image.asset('images/icons/tick.png'),
                                   ),
-                                ) : const SizedBox(),
+                                ),
+                                checkTwo
+                                    ? SizedBox(
+                                        height: 29,
+                                        width: 29,
+                                        child: ClipOval(
+                                          child: Image.asset(
+                                              'images/icons/tick.png',),
+                                        ),
+                                      )
+                                    : const SizedBox(),
                               ],
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10,),
                         const Divider(
                           thickness: 0.2,
                           color: Colors.black54,
                         ),
-
-
-
-                        const SizedBox(height: 10,),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             HapticFeedback.mediumImpact();
                             setState(() {
                               checkThree = !checkThree;
                             });
-
                           },
-                          child: SizedBox(
+                          child: Container(
+                            height: 40,
+                            color: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             width: double.infinity,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Price (High-Low)',
+                                Text(
+                                  'Price (High-Low)',
                                   style: AppTextStyle.textStyleOne(
                                     Colors.black,
                                     14,
                                     FontWeight.w600,
-                                  ),),
-                                checkThree ? SizedBox(
-                                  height:29,
-                                  width : 29,
-                                  child: ClipOval(
-                                    child: Image.asset('images/icons/tick.png'),
                                   ),
-                                ) : const SizedBox(),
+                                ),
+                                checkThree
+                                    ? SizedBox(
+                                        height: 29,
+                                        width: 29,
+                                        child: ClipOval(
+                                          child: Image.asset(
+                                              'images/icons/tick.png',),
+                                        ),
+                                      )
+                                    : const SizedBox(),
                               ],
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10,),
-
                         const Divider(
                           thickness: 0.2,
                           color: Colors.black54,
                         ),
-                        const SizedBox(height: 10,),
                         GestureDetector(
-                          onTap:(){
+                          onTap: () {
                             HapticFeedback.mediumImpact();
                             setState(() {
                               checkFour = !checkFour;
                             });
-
                           },
-                          child: SizedBox(
+                          child: Container(
+                            height: 40,
+                            color: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             width: double.infinity,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Price (Low-High)',
+                                Text(
+                                  'Price (Low-High)',
                                   style: AppTextStyle.textStyleOne(
                                     Colors.black,
                                     14,
                                     FontWeight.w600,
-                                  ),),
-                                checkFour ? SizedBox(
-                                  height:29,
-                                  width : 29,
-                                  child: ClipOval(
-                                    child: Image.asset('images/icons/tick.png'),
                                   ),
-                                ) : const SizedBox(),
+                                ),
+                                checkFour
+                                    ? SizedBox(
+                                        height: 29,
+                                        width: 29,
+                                        child: ClipOval(
+                                          child: Image.asset(
+                                              'images/icons/tick.png',),
+                                        ),
+                                      )
+                                    : const SizedBox(),
                               ],
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10,),
-
+                        const SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
                   ),
@@ -474,8 +509,25 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget> {
                     flex: 2,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(widget.ctx).pop();
-                      },
+
+                        HapticFeedback.mediumImpact();
+                         if(_selectedIndex == 0){
+                           setState(() {
+                             isCheckedOne = false;
+                             isCheckedTwo = false;
+                             isCheckedThree = false;
+                           }
+                           );
+                      }else{
+                           setState(() {
+                             checkOne = false;
+                             checkTwo = false;
+                             checkThree = false;
+                             checkFour = false;
+                           }
+                           );
+                         }
+                       },
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
