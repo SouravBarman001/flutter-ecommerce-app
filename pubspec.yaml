@@ -53,6 +53,8 @@ dependencies:
   flutter_screenutil: ^5.9.0
   syncfusion_flutter_sliders: ^23.1.36
   getwidget: ^4.0.0
+  flutter_rating_bar: ^4.0.1
+  percent_indicator: ^4.2.3
 
 
 dev_dependencies:
@@ -88,6 +90,7 @@ flutter:
     - images/home_page_icons/category_icons/
     - images/banner/
     - images/product_detail_icons/
+    - images/info_seller/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

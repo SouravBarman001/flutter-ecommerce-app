@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constant/text_style.dart';
 import '../../../home_core/data/domain/featured_product_model.dart';
-import '../../../home_core/presentation/pages/best_sellers.dart';
 
 class SearchProduct extends StatefulWidget {
   const SearchProduct({super.key});
@@ -41,14 +40,14 @@ class _SearchProductState extends State<SearchProduct> {
     'Milk & Honey':
         'https://img.pixelz.com/blog/white-background-photography/product-photo-liqueur-bottle-1000.jpg',
   };
+  FocusNode myFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus();
-        setState(() {
-          recentSearch = !recentSearch;
-        });
+       // FocusScope.of(context).unfocus();
+        myFocusNode.unfocus();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -116,6 +115,7 @@ class _SearchProductState extends State<SearchProduct> {
                       child: Column(
                         children: [
                           TextFormField(
+                            focusNode: myFocusNode,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: const TextStyle(
@@ -160,7 +160,7 @@ class _SearchProductState extends State<SearchProduct> {
                                 } else if (searchTerm.isEmpty) {
                                   _searchController.clear();
                                   recentSearch = false;
-                                  FocusScope.of(context).unfocus();
+                                 // FocusScope.of(context).unfocus();
                                 }
                               });
                             },
@@ -439,12 +439,6 @@ class _SearchProductState extends State<SearchProduct> {
                     ),
                     const SizedBox(
                       height: 30,
-                    ),
-
-                    /// Best Sellers
-                    BestSellers(featuredItems: featuredItems),
-                    const SizedBox(
-                      height: 10,
                     ),
                   ],
                 ),
