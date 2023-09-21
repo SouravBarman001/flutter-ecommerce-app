@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
     width = MediaQuery.of(context).size.height;
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100,
