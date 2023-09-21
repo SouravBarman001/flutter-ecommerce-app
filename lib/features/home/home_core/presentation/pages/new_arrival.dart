@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../core/constant/text_style.dart';
+import '../widgets/product_action_dialog.dart';
 @immutable
 class NewArrival extends StatefulWidget {
   const NewArrival({super.key, required this.featuredItems});
@@ -12,6 +13,29 @@ class NewArrival extends StatefulWidget {
 }
 
 class _NewArrivalState extends State<NewArrival> {
+
+  void _actionPopPup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+        insetPadding: const EdgeInsets.all(0.0),
+        contentPadding: const EdgeInsets.all(0.0),
+        content: SizedBox(
+          width: MediaQuery.of(context).size.width - 100,
+          child: ProductActionDialog(
+            ctx: ctx,
+          ),
+        ),
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -123,11 +147,11 @@ class _NewArrivalState extends State<NewArrival> {
                                     14.0,
                                     FontWeight.w700,),
                               ),
-                              const Row(
+                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Flexible(
+                                  const Flexible(
                                     flex: 2,
                                     child: Row(
                                       mainAxisAlignment:
@@ -145,7 +169,7 @@ class _NewArrivalState extends State<NewArrival> {
                                       ],
                                     ),
                                   ),
-                                  Flexible(
+                                  const Flexible(
                                       flex: 3,
                                       child: Text(
                                         '86 Reviews',
@@ -153,10 +177,16 @@ class _NewArrivalState extends State<NewArrival> {
                                       ),),
                                   Flexible(
                                       flex: 2,
-                                      child: Icon(
-                                        Icons.more_vert_outlined,
-                                        color: Color(0xffFFC120),
-                                        size: 15,
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          _actionPopPup(context);
+                                          HapticFeedback.mediumImpact();
+                                        },
+                                        child: const Icon(
+                                          Icons.more_vert_outlined,
+                                          color: Color(0xffFFC120),
+                                          size: 15,
+                                        ),
                                       ),),
                                 ],
                               ),
