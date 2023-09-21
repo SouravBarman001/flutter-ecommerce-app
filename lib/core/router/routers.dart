@@ -1,6 +1,7 @@
 class RoutersName{
 
-  static String home = 'home';
+  static String homeRoot = 'home-root';
+  static String homeShell = 'home-shell';
   static String root = 'root';
   static String category = 'category';
   static String cart = 'cart';
@@ -14,5 +15,12 @@ class RoutersName{
   static String profileAndPassword = 'profile-and-password';
   static String productDetails = 'product-details';
   static String searchProduct = 'search-product';
+  static String categoryDetails = 'category-details';
+  static String bottomNav = 'bottom-nav';
+  static String wishList = 'wish-list';
+  static String order = 'order';
+  static String account = 'account';
+  static String infoSeller = 'info-seller';
+  static String productReview = 'product-review';
 
 }
