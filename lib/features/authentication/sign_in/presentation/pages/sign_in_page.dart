@@ -40,13 +40,16 @@ class _SignInPageState extends State<SignInPage> {
     return state;
   }
 
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100,
@@ -77,7 +80,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  context.push('/signup');
+                  context.push('/bottom-nav');
                   HapticFeedback.mediumImpact();
                 },
                 child: Text(
