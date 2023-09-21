@@ -408,7 +408,7 @@ class _HomePageState extends State<HomePage> {
                                     onTap: () {
                                       HapticFeedback.heavyImpact();
                                       context.push('/product-details',
-                                          extra: entry);
+                                          extra: entry,);
                                     },
                                     child: SizedBox(
                                       width: double.infinity,
