@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:input_form_field/input_form_field.dart';
 import '../../data/domain/featured_product_model.dart';
+import '../widgets/product_action_dialog.dart';
 import 'best_sellers.dart';
 import 'new_arrival.dart';
 
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         'https://img.pixelz.com/blog/white-background-photography/product-photo-liqueur-bottle-1000.jpg',
   };
 
-  void _showAlertDialog(BuildContext context){
+  void _showAlertDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -63,13 +64,32 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
+  void _actionPopPup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+        insetPadding: const EdgeInsets.all(0.0),
+        contentPadding: const EdgeInsets.all(0.0),
+        content: SizedBox(
+          width: MediaQuery.of(context).size.width - 100,
+          child: ProductActionDialog(
+            ctx: ctx,
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-       FocusManager.instance.primaryFocus?.unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -235,8 +255,7 @@ class _HomePageState extends State<HomePage> {
                         enableInfiniteScroll: true,
                         aspectRatio: 16 / 9,
                         onPageChanged: (index, reason) {
-                          setState(() {
-                          });
+                          setState(() {});
                         },
                       ),
                     ),
@@ -255,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             HapticFeedback.mediumImpact();
                             _showAlertDialog(context);
                           },
@@ -284,10 +303,9 @@ class _HomePageState extends State<HomePage> {
                           final key = entry.key;
                           final value = entry.value;
                           return GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               HapticFeedback.heavyImpact();
                               context.go('/home/category-details/$key');
-
                             },
                             child: Container(
                               height: 80,
@@ -365,28 +383,33 @@ class _HomePageState extends State<HomePage> {
                         itemCount: FeaturedProductModel.listItems.length,
                         itemBuilder: (BuildContext context, int index) {
                           final entry = FeaturedProductModel.listItems[index];
-                          return GestureDetector(
-                            onTap: () {
-                              HapticFeedback.heavyImpact();
-                              context.push('/product-details', extra: entry);
-                            },
-                            child: Container(
-                              height: 242,
-                              width: 156,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              alignment: Alignment.centerLeft,
-                              margin: const EdgeInsets.only(
-                                  top: 5, right: 5, left: 5, bottom: 5,),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  // Display the key
-                                  Expanded(
-                                    flex: 2,
+                          return Container(
+                            height: 242,
+                            width: 156,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            margin: const EdgeInsets.only(
+                              top: 5,
+                              right: 5,
+                              left: 5,
+                              bottom: 5,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // Display the key
+                                Expanded(
+                                  flex: 2,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      HapticFeedback.heavyImpact();
+                                      context.push('/product-details',
+                                          extra: entry);
+                                    },
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: ClipRRect(
@@ -398,82 +421,95 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.only(
-                                          top: 5,
-                                          left: 10,
-                                          right: 10,
-                                          bottom: 5,),
-                                      width: double.infinity,
-                                      //    color: Colors.grey,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(
-                                            entry.name.toString(),
-                                            style: AppTextStyle.textStyleOne(
-                                                Colors.black,
-                                                14.0,
-                                                FontWeight.w600,),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(
+                                      top: 5,
+                                      left: 10,
+                                      right: 10,
+                                      bottom: 5,
+                                    ),
+                                    width: double.infinity,
+                                    //    color: Colors.grey,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          entry.name.toString(),
+                                          style: AppTextStyle.textStyleOne(
+                                            Colors.black,
+                                            14.0,
+                                            FontWeight.w600,
                                           ),
-                                          Text(
-                                            'Rp. 1.500.000',
-                                            style: AppTextStyle.textStyleOne(
-                                                const Color(0xffFE3A30),
-                                                14.0,
-                                                FontWeight.w700,),
+                                        ),
+                                        Text(
+                                          'Rp. 1.500.000',
+                                          style: AppTextStyle.textStyleOne(
+                                            const Color(0xffFE3A30),
+                                            14.0,
+                                            FontWeight.w700,
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                flex: 2,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.star,
-                                                      color: Color(0xffFFC120),
-                                                      size: 15,
-                                                    ),
-                                                    Text(
-                                                      entry.rating.toString(),
-                                                      style: const TextStyle(
-                                                          fontSize: 10,),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Flexible(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    '${entry.review.toString()}'
-                                                        'Reviews',
-                                                    style: const TextStyle(
-                                                        fontSize: 10,),
-                                                  ),),
-                                              const Flexible(
-                                                  flex: 2,
-                                                  child: Icon(
-                                                    Icons.more_vert_outlined,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Flexible(
+                                              flex: 2,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.star,
                                                     color: Color(0xffFFC120),
                                                     size: 15,
-                                                  ),),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                  ),
+                                                  Text(
+                                                    entry.rating.toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Flexible(
+                                              flex: 3,
+                                              child: Text(
+                                                '${entry.review.toString()}'
+                                                'Reviews',
+                                                style: const TextStyle(
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                            ),
+                                            Flexible(
+                                              flex: 2,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  HapticFeedback.heavyImpact();
+                                                  _actionPopPup(context);
+                                                },
+                                                child: const Icon(
+                                                  Icons.more_vert_outlined,
+                                                  color: Color(0xffFFC120),
+                                                  size: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         },

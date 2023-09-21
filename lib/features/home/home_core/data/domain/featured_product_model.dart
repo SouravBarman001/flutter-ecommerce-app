@@ -32,6 +32,19 @@ class FeaturedProductModel {
       rating: '4.5',
       review: '90',
     ),
+    FeaturedProductModel(
+      imgUrl:
+          'https://assets.entrepreneur.com/content/3x2/2000/20171212213121-apple-website.jpeg',
+      name: 'Smart watch',
+      rating: '4.5',
+      review: '70',
+    ),FeaturedProductModel(
+      imgUrl:
+          'https://www.tecq.in/wp-content/uploads/2021/03/New-Project-34.jpg',
+      name: 'OPPO F19 Pro',
+      rating: '3.5',
+      review: '50',
+    ),
   ];
 
   static List<FeaturedProductModel> get listItems => _list;
