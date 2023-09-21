@@ -39,7 +39,7 @@ class _ProfileAndPasswordState extends State<ProfileAndPassword> {
     width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100,
@@ -102,7 +102,7 @@ class _ProfileAndPasswordState extends State<ProfileAndPassword> {
                     SizedBox(
                       child: Text(
                         'Complete the following final data '
-                            'to enter the Mega Mall application',
+                        'to enter the Mega Mall application',
                         style: AppTextStyle.textStyleOne(
                           const Color(0xff838589),
                           15.0,
