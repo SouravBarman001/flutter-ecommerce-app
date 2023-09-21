@@ -102,7 +102,7 @@ class _VerificationPageState extends State<VerificationPage> {
     width = MediaQuery.of(context).size.height;
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100,
