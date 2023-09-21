@@ -75,7 +75,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
     width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100,
