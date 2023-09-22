@@ -187,38 +187,48 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                         const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'All Sub Categories',
-                                style: AppTextStyle.textStyleOne(
-                                  Colors.black,
-                                  14,
-                                  FontWeight.w600,
+                        GestureDetector(
+                          onTap: (){
+                            HapticFeedback.mediumImpact();
+                            setState(() {
+                              isCheckedOne = !isCheckedOne;
+                            });
+                          },
+                          child: Container(
+                            color: const Color(0xff00FFFFFF),
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'All Sub Categories',
+                                  style: AppTextStyle.textStyleOne(
+                                    Colors.black,
+                                    14,
+                                    FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              GFCheckbox(
-                                size: 23,
-                                activeBgColor: Colors.red,
-                                type: GFCheckboxType.circle,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isCheckedOne = value;
-                                  });
-                                },
-                                activeIcon: const Icon(
-                                  Icons.check,
-                                  size: 15,
-                                  weight: 5,
-                                  color: Colors.white,
+                                GFCheckbox(
+                                  size: 23,
+                                  activeBgColor: Colors.red,
+                                  type: GFCheckboxType.circle,
+                                  onChanged: (value) {
+                                    HapticFeedback.mediumImpact();
+                                    setState(() {
+                                      isCheckedOne = value;
+                                    });
+                                  },
+                                  activeIcon: const Icon(
+                                    Icons.check,
+                                    size: 15,
+                                    weight: 5,
+                                    color: Colors.white,
+                                  ),
+                                  value: isCheckedOne,
+                                  inactiveIcon: null,
                                 ),
-                                value: isCheckedOne,
-                                inactiveIcon: null,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -231,38 +241,49 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                         const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Hand-phone',
-                                style: AppTextStyle.textStyleOne(
-                                  Colors.black,
-                                  14,
-                                  FontWeight.w600,
+                        GestureDetector(
+                          onTap: (){
+                            HapticFeedback.mediumImpact();
+                            setState(() {
+                              isCheckedTwo = !isCheckedTwo;
+                            });
+                          },
+                          child: Container(
+                            color: const Color(0xff00FFFFFF),
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Hand-phone',
+                                  style: AppTextStyle.textStyleOne(
+                                    Colors.black,
+                                    14,
+                                    FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              GFCheckbox(
-                                size: 23,
-                                activeBgColor: Colors.red,
-                                type: GFCheckboxType.circle,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isCheckedTwo = value;
-                                  });
-                                },
-                                activeIcon: const Icon(
-                                  Icons.check,
-                                  size: 15,
-                                  weight: 5,
-                                  color: Colors.white,
+                                GFCheckbox(
+                                  size: 23,
+                                  activeBgColor: Colors.red,
+                                  type: GFCheckboxType.circle,
+                                  onChanged: (value) {
+                                    HapticFeedback.mediumImpact();
+
+                                    setState(() {
+                                      isCheckedTwo = value;
+                                    });
+                                  },
+                                  activeIcon: const Icon(
+                                    Icons.check,
+                                    size: 15,
+                                    weight: 5,
+                                    color: Colors.white,
+                                  ),
+                                  value: isCheckedTwo,
+                                  inactiveIcon: null,
                                 ),
-                                value: isCheckedTwo,
-                                inactiveIcon: null,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -275,38 +296,49 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                         const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Computer',
-                                style: AppTextStyle.textStyleOne(
-                                  Colors.black,
-                                  14,
-                                  FontWeight.w600,
+                        GestureDetector(
+                          onTap: (){
+                            HapticFeedback.mediumImpact();
+                            setState(() {
+                              isCheckedThree = !isCheckedThree;
+                            });
+                          },
+                          child: Container(
+                            color: const Color(0xff00FFFFFF),
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Computer',
+                                  style: AppTextStyle.textStyleOne(
+                                    Colors.black,
+                                    14,
+                                    FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              GFCheckbox(
-                                size: 23,
-                                activeBgColor: Colors.red,
-                                type: GFCheckboxType.circle,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isCheckedThree = value;
-                                  });
-                                },
-                                activeIcon: const Icon(
-                                  Icons.check,
-                                  size: 15,
-                                  weight: 5,
-                                  color: Colors.white,
+                                GFCheckbox(
+                                  size: 23,
+                                  activeBgColor: Colors.red,
+                                  type: GFCheckboxType.circle,
+                                  onChanged: (value) {
+                                    HapticFeedback.mediumImpact();
+
+                                    setState(() {
+                                      isCheckedThree = value;
+                                    });
+                                  },
+                                  activeIcon: const Icon(
+                                    Icons.check,
+                                    size: 15,
+                                    weight: 5,
+                                    color: Colors.white,
+                                  ),
+                                  value: isCheckedThree,
+                                  inactiveIcon: null,
                                 ),
-                                value: isCheckedThree,
-                                inactiveIcon: null,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
