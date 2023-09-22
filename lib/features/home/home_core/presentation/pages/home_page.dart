@@ -483,7 +483,7 @@ class _HomePageState extends State<HomePage> {
                                               flex: 3,
                                               child: Text(
                                                 '${entry.review.toString()}'
-                                                'Reviews',
+                                                ' Reviews',
                                                 style: const TextStyle(
                                                   fontSize: 10,
                                                 ),
@@ -495,6 +495,7 @@ class _HomePageState extends State<HomePage> {
                                                 onTap: () {
                                                   HapticFeedback.heavyImpact();
                                                   _actionPopPup(context);
+
                                                 },
                                                 child: const Icon(
                                                   Icons.more_vert_outlined,

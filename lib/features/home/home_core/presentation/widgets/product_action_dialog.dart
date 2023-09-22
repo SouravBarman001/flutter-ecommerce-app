@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constant/text_style.dart';
+import '../../../add_to_cart/presentation/widgets/add_to_cart_widgets.dart';
 
 class ProductActionDialog extends StatefulWidget {
   const ProductActionDialog({super.key, required this.ctx});
@@ -20,6 +21,28 @@ class _ProductActionDialogState extends State<ProductActionDialog> {
     'Souvenir': 'souvenir.png',
     'Computer': 'gadget.png',
   };
+
+  void addToCartDialogBox(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+        insetPadding: const EdgeInsets.all(0.0),
+        contentPadding: const EdgeInsets.all(0.0),
+        content: SizedBox(
+          width: MediaQuery.of(context).size.width - 100,
+          child: AddToCartWidget(
+            ctx: ctx,
+          ),
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +118,8 @@ class _ProductActionDialogState extends State<ProductActionDialog> {
               child: GestureDetector(
                 onTap: (){
                   HapticFeedback.mediumImpact();
+                  addToCartDialogBox(context);
+
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -102,7 +127,7 @@ class _ProductActionDialogState extends State<ProductActionDialog> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: const Color(0xff3669C9),
+                  color: const Color(0xff3669C9),
                   ),
                   child: Text(
                     'Add To Cart',
