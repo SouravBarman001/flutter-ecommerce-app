@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:ecommerce_module/core/router/router_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,23 +19,23 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final router = ref.watch(goRouterProvider);
-
     return ScreenUtilInit(
+      child: AppTheme(
+        themeData: const UIThemeData(),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            fontFamily: 'DM Sans',
+          ),
+          routeInformationParser: router.routeInformationParser,
+          routeInformationProvider: router.routeInformationProvider,
+          routerDelegate: router.routerDelegate,
+        ),
+      ),
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, child) {
-        return MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'DM Sans',
-        ),
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
-        routerDelegate: router.routerDelegate,
-        );
-      },
     );
   }
 }
