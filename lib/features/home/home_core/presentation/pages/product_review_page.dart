@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:percent_indicator/percent_indicator.dart';
 import '../../../../../core/constant/text_style.dart';
-import '../../../../../core/router/routers.dart';
 import '../../data/domain/user_model.dart';
 
 class ProductReviewPage extends StatefulWidget {
