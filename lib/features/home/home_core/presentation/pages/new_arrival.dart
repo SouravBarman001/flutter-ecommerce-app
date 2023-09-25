@@ -1,11 +1,10 @@
+import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/home/home_core/presentation/widgets/helper/dialog_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../../../../core/constant/text_style.dart';
-import '../widgets/product_action_dialog.dart';
 @immutable
 class NewArrival extends StatefulWidget {
-  const NewArrival({super.key, required this.featuredItems});
+  const NewArrival({required this.featuredItems, super.key});
   final Map featuredItems;
 
   @override
@@ -13,27 +12,6 @@ class NewArrival extends StatefulWidget {
 }
 
 class _NewArrivalState extends State<NewArrival> {
-
-  void _actionPopPup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
-          ),
-        ),
-        insetPadding: const EdgeInsets.all(0.0),
-        contentPadding: const EdgeInsets.all(0.0),
-        content: SizedBox(
-          width: MediaQuery.of(context).size.width - 100,
-          child: ProductActionDialog(
-            ctx: ctx,
-          ),
-        ),
-      ),
-    );
-  }
 
 
   @override
@@ -66,7 +44,7 @@ class _NewArrivalState extends State<NewArrival> {
               'New Arrivals',
               style: AppTextStyle.textStyleOne(
                 Colors.black,
-                16.0,
+                16,
                 FontWeight.w600,
               ),
             ),
@@ -74,7 +52,7 @@ class _NewArrivalState extends State<NewArrival> {
               'See All',
               style: AppTextStyle.textStyleOne(
                 Colors.blue,
-                16.0,
+                16,
                 FontWeight.w600,
               ),
             ),
@@ -96,7 +74,7 @@ class _NewArrivalState extends State<NewArrival> {
               final key = entry.key;
               final value = entry.value;
               return GestureDetector(
-                onTap: () => HapticFeedback.heavyImpact(),
+                onTap: HapticFeedback.heavyImpact,
                 child: Container(
                   height: 242,
                   width: 156,
@@ -109,7 +87,6 @@ class _NewArrivalState extends State<NewArrival> {
                       top: 5, right: 5, left: 5, bottom: 5,),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Display the key
                       Expanded(
@@ -138,13 +115,13 @@ class _NewArrivalState extends State<NewArrival> {
                               Text(
                                 key.toString(),
                                 style: AppTextStyle.textStyleOne(
-                                    Colors.black, 14.0, FontWeight.w600,),
+                                    Colors.black, 14, FontWeight.w600,),
                               ),
                               Text(
                                 'Rp. 1.500.000',
                                 style: AppTextStyle.textStyleOne(
                                     const Color(0xffFE3A30),
-                                    14.0,
+                                    14,
                                     FontWeight.w700,),
                               ),
                                Row(
@@ -179,7 +156,7 @@ class _NewArrivalState extends State<NewArrival> {
                                       flex: 2,
                                       child: GestureDetector(
                                         onTap: (){
-                                          _actionPopPup(context);
+                                          DialogHelper.actionPopPup(context);
                                           HapticFeedback.mediumImpact();
                                         },
                                         child: const Icon(

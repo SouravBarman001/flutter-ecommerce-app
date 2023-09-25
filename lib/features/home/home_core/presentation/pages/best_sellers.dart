@@ -1,11 +1,10 @@
+import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/home/home_core/presentation/widgets/product_action_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../../../../core/constant/text_style.dart';
-import '../widgets/product_action_dialog.dart';
 @immutable
 class BestSellers extends StatefulWidget {
-  const BestSellers({super.key, required this.featuredItems});
+  const BestSellers({required this.featuredItems, super.key});
   final Map featuredItems;
 
   @override

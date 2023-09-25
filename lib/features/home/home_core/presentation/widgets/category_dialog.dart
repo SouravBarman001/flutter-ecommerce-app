@@ -1,8 +1,8 @@
+import 'package:ecommerce_module/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../core/constant/text_style.dart';
 
 class CategoryDialog extends StatefulWidget {
   const CategoryDialog({super.key, required this.ctx});
