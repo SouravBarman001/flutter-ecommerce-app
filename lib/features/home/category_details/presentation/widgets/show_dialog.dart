@@ -6,7 +6,7 @@ import 'package:getwidget/components/checkbox/gf_checkbox.dart';
 import 'package:getwidget/types/gf_checkbox_type.dart';
 
 class ShowDialogWidget extends StatefulWidget {
-  const ShowDialogWidget({super.key, required this.ctx});
+  const ShowDialogWidget({required this.ctx, super.key});
   final BuildContext ctx;
 
   @override
@@ -15,8 +15,8 @@ class ShowDialogWidget extends StatefulWidget {
 
 class _ShowDialogWidgetState extends State<ShowDialogWidget>
     with SingleTickerProviderStateMixin {
-  double start = 50.0; // Initial value for the left thumb
-  double end = 100.0; // Initial value for the right thumb
+  double start = 50; // Initial value for the left thumb
+  double end = 100; // Initial value for the right thumb
   bool isCheckedOne = false;
   bool isCheckedTwo = false;
   bool isCheckedThree = false;
@@ -33,13 +33,13 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
     return DefaultTabController(
       length: 2,
       child: Container(
+        padding: const EdgeInsets.only(top: 8),
         height: 400.h,
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,11 +62,11 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               height: 50,
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 50,
                     width: 160,
                     child: TabBar(
@@ -81,11 +81,11 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                       indicatorWeight: 3,
                       indicatorSize: TabBarIndicatorSize.label,
                       labelColor: Colors.black,
-                      tabs: [
-                        const Tab(
+                      tabs: const [
+                        Tab(
                           text: 'Filter',
                         ),
-                        const Tab(
+                        Tab(
                           text: 'Sorting',
                         ),
                       ],
@@ -383,16 +383,14 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                                     FontWeight.w600,
                                   ),
                                 ),
-                                checkOne
-                                    ? SizedBox(
+                                if (checkOne) SizedBox(
                                         height: 29,
                                         width: 29,
                                         child: ClipOval(
                                           child: Image.asset(
                                               'images/icons/tick.png',),
                                         ),
-                                      )
-                                    : const SizedBox(),
+                                      ) else const SizedBox(),
                               ],
                             ),
                           ),
@@ -426,16 +424,14 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                                     FontWeight.w600,
                                   ),
                                 ),
-                                checkTwo
-                                    ? SizedBox(
+                                if (checkTwo) SizedBox(
                                         height: 29,
                                         width: 29,
                                         child: ClipOval(
                                           child: Image.asset(
                                               'images/icons/tick.png',),
                                         ),
-                                      )
-                                    : const SizedBox(),
+                                      ) else const SizedBox(),
                               ],
                             ),
                           ),
@@ -467,16 +463,14 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                                     FontWeight.w600,
                                   ),
                                 ),
-                                checkThree
-                                    ? SizedBox(
+                                if (checkThree) SizedBox(
                                         height: 29,
                                         width: 29,
                                         child: ClipOval(
                                           child: Image.asset(
                                               'images/icons/tick.png',),
                                         ),
-                                      )
-                                    : const SizedBox(),
+                                      ) else const SizedBox(),
                               ],
                             ),
                           ),
@@ -508,16 +502,14 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                                     FontWeight.w600,
                                   ),
                                 ),
-                                checkFour
-                                    ? SizedBox(
+                                if (checkFour) SizedBox(
                                         height: 29,
                                         width: 29,
                                         child: ClipOval(
                                           child: Image.asset(
                                               'images/icons/tick.png',),
                                         ),
-                                      )
-                                    : const SizedBox(),
+                                      ) else const SizedBox(),
                               ],
                             ),
                           ),
@@ -531,7 +523,7 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               height: 50,
               width: double.infinity,
               child: Row(
