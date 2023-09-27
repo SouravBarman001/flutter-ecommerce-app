@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
-class ProductDetailsAppbar extends StatelessWidget  implements PreferredSizeWidget{
+class ProductDetailsAppbar extends StatelessWidget
+    implements PreferredSizeWidget {
   const ProductDetailsAppbar({super.key});
   @override
-  Size get preferredSize => throw UnimplementedError();
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class ProductDetailsAppbar extends StatelessWidget  implements PreferredSizeWidg
                       children: [
                         badges.Badge(
                           position:
-                          badges.BadgePosition.topEnd(top: -9, end: -1),
+                              badges.BadgePosition.topEnd(top: -9, end: -1),
                           badgeContent: const Text(''),
                           child: Positioned(
                             child: SizedBox(
@@ -101,6 +102,4 @@ class ProductDetailsAppbar extends StatelessWidget  implements PreferredSizeWidg
       ],
     );
   }
-
-
 }

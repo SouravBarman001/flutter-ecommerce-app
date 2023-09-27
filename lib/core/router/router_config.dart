@@ -3,10 +3,13 @@ import 'package:ecommerce_module/features/account/presentation/pages/account_pag
 import 'package:ecommerce_module/features/authentication/profile_and_password/presentation/pages/profile_and_password_page.dart';
 import 'package:ecommerce_module/features/authentication/reset_password/presentation/pages/reset_password_page.dart';
 import 'package:ecommerce_module/features/authentication/sign_in/presentation/pages/sign_in_page.dart';
+import 'package:ecommerce_module/features/authentication/sign_up/presentation/pages/sign_up_page.dart';
 import 'package:ecommerce_module/features/authentication/update_password/presentation/pages/update_password_page.dart';
 import 'package:ecommerce_module/features/authentication/verification/presentation/pages/registration_verification_pages.dart';
-import 'package:ecommerce_module/features/authentication/sign_up/presentation/pages/sign_up_page.dart';
+import 'package:ecommerce_module/features/authentication/verification/presentation/pages/verification_page.dart';
 import 'package:ecommerce_module/features/home/category_details/presentation/pages/category_details.dart';
+import 'package:ecommerce_module/features/home/home_core/data/domain/featured_product_model.dart';
+import 'package:ecommerce_module/features/home/home_core/presentation/pages/home_page.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/pages/main_page.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/pages/product_review_page.dart';
 import 'package:ecommerce_module/features/home/info_seller/presentation/pages/info_seller.dart';
@@ -16,11 +19,6 @@ import 'package:ecommerce_module/features/wish_list/presentation/pages/wish_list
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../features/authentication/verification/presentation/pages/verification_page.dart';
-import '../../features/home/home_core/data/domain/featured_product_model.dart';
-import '../../features/home/home_core/presentation/pages/home_page.dart';
-import '../../features/home/home_core/presentation/pages/product_details.dart';
 
 final GlobalKey<NavigatorState> _rootState = GlobalKey(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellState = GlobalKey(debugLabel: 'shell');
@@ -108,7 +106,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: RoutersName.productDetails,
         builder: (context, state) {
           // ignore: lines_longer_than_80_chars
-          final FeaturedProductModel data = state.extra as FeaturedProductModel;
+          final data = state.extra! as FeaturedProductModel;
           return ProductDetails(
             key: state.pageKey,
             data: data,
