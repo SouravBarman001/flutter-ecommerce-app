@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class CategoryDialog extends StatefulWidget {
-  const CategoryDialog({super.key, required this.ctx});
+  const CategoryDialog({required this.ctx, super.key});
   final BuildContext ctx;
 
   @override
@@ -27,15 +27,14 @@ class _CategoryDialogState extends State<CategoryDialog> {
     return DefaultTabController(
       length: 2,
       child: Container(
-        height: 170.h,
+        height: 135.h,
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +87,6 @@ class _CategoryDialogState extends State<CategoryDialog> {
                         margin: const EdgeInsets.only(top: 5, right: 1),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             // Display the key
                             SizedBox(
@@ -103,7 +101,7 @@ class _CategoryDialogState extends State<CategoryDialog> {
                               height: 10,
                             ),
                             Text(
-                              key.toString(),
+                              key,
                               style: AppTextStyle.smallTextOne,
                             ), // Display the corresponding image
                           ],
