@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class DialogHelper{
 
-  static void showAlertDialog(BuildContext context) {
+  static void showCategoryDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(

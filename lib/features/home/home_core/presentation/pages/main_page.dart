@@ -1,9 +1,8 @@
+import 'package:ecommerce_module/features/home/home_core/presentation/pages/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
-import 'bottom_nav.dart';
-
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, required this.child});
+  const MainPage({required this.child, super.key});
   final Widget child;
 
   @override

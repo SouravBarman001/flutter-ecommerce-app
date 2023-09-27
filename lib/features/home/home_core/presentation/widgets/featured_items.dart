@@ -1,6 +1,9 @@
 part of '../pages/home_page.dart';
 
-class _FeaturedItems extends StatelessWidget {
+class FeaturedItems extends StatelessWidget{
+  const FeaturedItems({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,10 +39,7 @@ class _FeaturedItems extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       HapticFeedback.heavyImpact();
-                      context.push(
-                        '/product-details',
-                        extra: entry,
-                      );
+                      context.push('/product-details', extra: entry);
                     },
                     child: SizedBox(
                       width: double.infinity,

@@ -1,6 +1,5 @@
 part of '../pages/home_page.dart';
 
-@immutable
 class _HomeBody extends StatelessWidget {
 
  final Map<String, String> featuredItems = {
@@ -42,7 +41,7 @@ class _HomeBody extends StatelessWidget {
               ),
             ],
           ),
-          _FeaturedItems(),
+          FeaturedItems(),
           const SizedBox(
             height: 10,
           ),

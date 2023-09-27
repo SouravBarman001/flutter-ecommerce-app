@@ -1,30 +1,25 @@
-import 'package:badges/badges.dart' as badges;
 import 'package:ecommerce_module/core/constant/media_query_size.dart';
 import 'package:ecommerce_module/core/constant/text_style.dart';
-import 'package:ecommerce_module/core/router/routers.dart';
 import 'package:ecommerce_module/features/home/home_core/data/domain/featured_product_model.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/pages/best_sellers.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/pages/new_arrival.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/widgets/constant/product_resource.dart';
+import 'package:ecommerce_module/features/home/home_core/presentation/widgets/details_product_review.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/widgets/helper/dialog_helper.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/widgets/home_app_bar.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/widgets/home_banner.dart';
+import 'package:ecommerce_module/features/home/home_core/presentation/widgets/product_details_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:input_form_field/input_form_field.dart';
-
-import '../widgets/details_product_review.dart';
-import '../widgets/product_details_app_bar.dart';
 
 part './product_details.dart';
 part '../widgets/category_product_items.dart';
 part '../widgets/featured_items.dart';
 part '../widgets/home_body.dart';
-
-
+part '../widgets/product_details_seller_info_section.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     'Souvenir': 'souvenir.png',
   };
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +48,7 @@ class _HomePageState extends State<HomePage> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: const HomeAppBar(),
         body: SingleChildScrollView(
           child: Column(
@@ -115,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                         GestureDetector(
                           onTap: () {
                             HapticFeedback.mediumImpact();
-                            DialogHelper.showAlertDialog(context);
+                            DialogHelper.showCategoryDialog(context);
                           },
                           child: Text(
                             'See All',
