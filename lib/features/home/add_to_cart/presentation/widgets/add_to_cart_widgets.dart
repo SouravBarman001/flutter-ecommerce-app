@@ -42,14 +42,14 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 290.h,
+      height: 265.h,
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.only(top: 10),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,7 +130,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                       ),
                     ),
                   ],
-                )),
+                ),),
             Divider(
               thickness: 1,
               color: Colors.grey[300],
@@ -154,7 +154,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Container(
+                  SizedBox(
                     height: 40,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -242,9 +242,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
               width: double.infinity,
               height: 70,
               child: GestureDetector(
-                onTap: () {
-                  HapticFeedback.mediumImpact();
-                },
+                onTap: HapticFeedback.mediumImpact,
                 child: Container(
                   alignment: Alignment.center,
                   height: 50,
