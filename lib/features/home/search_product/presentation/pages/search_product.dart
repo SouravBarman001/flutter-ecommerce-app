@@ -4,6 +4,7 @@ import 'package:ecommerce_module/features/home/home_core/presentation/pages/home
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 
@@ -65,7 +66,7 @@ class _SearchProductState extends State<SearchProduct> {
                     ),
                     const FeaturedItems(),
                     const SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
                   ],
                 ),
