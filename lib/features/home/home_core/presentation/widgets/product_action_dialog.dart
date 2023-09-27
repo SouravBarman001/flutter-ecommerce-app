@@ -1,8 +1,8 @@
+import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/home/add_to_cart/presentation/widgets/add_to_cart_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/constant/text_style.dart';
-import '../../../add_to_cart/presentation/widgets/add_to_cart_widgets.dart';
 
 class ProductActionDialog extends StatefulWidget {
   const ProductActionDialog({super.key, required this.ctx});
@@ -31,8 +31,7 @@ class _ProductActionDialogState extends State<ProductActionDialog> {
             Radius.circular(10.0),
           ),
         ),
-        insetPadding: const EdgeInsets.all(0.0),
-        contentPadding: const EdgeInsets.all(0.0),
+
         content: SizedBox(
           width: MediaQuery.of(context).size.width - 100,
           child: AddToCartWidget(
@@ -47,14 +46,14 @@ class _ProductActionDialogState extends State<ProductActionDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 210.h,
+      height: 190.h,
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.only(top: 10),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
