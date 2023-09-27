@@ -34,7 +34,7 @@ class _ShowDialogWidgetState extends State<ShowDialogWidget>
       length: 2,
       child: Container(
         padding: const EdgeInsets.only(top: 8),
-        height: 400.h,
+        height: 370.h,
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
