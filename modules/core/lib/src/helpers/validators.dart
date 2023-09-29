@@ -11,7 +11,8 @@ class Validators {
     r'^[a-zA-Z0-9_.+-]+$',
   );
 
-  static String? isValidEmail(String? email) {
+  static String? isValidEmail(String? value) {
+    final email = value?.toLowerCase().trimRight();
     if (email == null || email.isEmpty) {
       return 'Please enter email';
     } else {
