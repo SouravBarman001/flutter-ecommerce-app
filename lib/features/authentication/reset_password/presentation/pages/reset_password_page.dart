@@ -1,52 +1,35 @@
+import 'package:core/core.dart';
+import 'package:ecommerce_module/core/constant/media_query_size.dart';
+import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/authentication/reset_password/presentation/riverpod/reset_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:input_form_field/input_form_field.dart';
-import '../../../../../core/constant/media_query_size.dart';
-import '../../../../../core/constant/text_style.dart';
 
-class ResetPasswordPage extends StatefulWidget {
+class ResetPasswordPage extends ConsumerStatefulWidget {
   const ResetPasswordPage({super.key});
 
   @override
-  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
+  ConsumerState<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
 
-class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  final TextEditingController _textEditingControllerOne =
-      TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
-  bool passwordVisible = false;
-  bool _isValid = false;
-
-  @override
-  void initState() {
-    super.initState();
-    passwordVisible = true;
-  }
-
-  bool _saveForm(context, String gmail) {
-    bool state = false;
-    setState(() {
-      _isValid = _formKey.currentState!.validate();
-      if (_isValid == true) {
-        state = true;
-        // _showMyDialog(context, gmail);
-      } else {
-        state = false;
-      }
-    });
-    return state;
-  }
+class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.height;
 
+    final state = ref.watch(resetProvider);
+    final notifier = ref.read(resetProvider.notifier);
+
     return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      onTap: () {
+        notifier.validate();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 100,
@@ -65,15 +48,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: SingleChildScrollView(
               child: Form(
-                key: _formKey,
+                key: notifier.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: height * 0.04,
+                    const SizedBox(
+                      height: 40,
                     ),
                     const Text(
                       'Reset Password',
@@ -86,7 +69,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       'Enter Email account to reset your password',
                       style: AppTextStyle.textStyleOne(
                         const Color(0xff838589),
-                        15.0,
+                        15,
                         FontWeight.w400,
                       ),
                     ),
@@ -103,27 +86,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     InputFormField(
                       borderRadius: BorderRadius.circular(10),
                       fillColor: const Color(0xfffafafa),
-                      textEditingController: _textEditingControllerOne,
-                      validator: (val) {
-                        // Check if this field is empty
-                        final value = val?.toLowerCase().trimRight();
-                        if (value == null || value.isEmpty) {
-                          return 'This field is required';
-                        } else {
-                          if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
-                              .hasMatch(value)) {
-                            return 'Please enter a valid email address';
-                          } else {
-                            return null;
-                          }
-                        }
-
-                        // the email is valid
-                        // return null;
-                      },
+                      textEditingController: notifier.emailField,
+                      validator: Validators.isValidEmail,
                       hintTextStyle: AppTextStyle.textStyleOne(
                         const Color(0xffC4C5C4),
-                        14.0,
+                        14,
                         FontWeight.w400,
                       ),
                       hintText: 'Enter your Email Address',
@@ -140,12 +107,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        final bool state =
-                            _saveForm(context, _textEditingControllerOne.text);
 
-                        if (state) {
+                        if (state.isDisabled == false) {
                           context.push(
-                              '/verification/${_textEditingControllerOne.text}',);
+                              '/verification/${notifier.emailField.text}',);
                         }
                         HapticFeedback.mediumImpact();
                       },
@@ -161,7 +126,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           'Reset',
                           style: AppTextStyle.textStyleOne(
                             Colors.white,
-                            14.0,
+                            14,
                             FontWeight.w500,
                           ),
                         ),
