@@ -9,14 +9,14 @@ class _SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/signup');
+        context.push('/${Routers.signUp}');
         HapticFeedback.mediumImpact();
       },
       child: Text(
         'Sign Up',
         style: AppTextStyle.textStyleOne(
           Colors.blue,
-          15.0,
+          13.sp,
           FontWeight.w500,
         ),
       ),

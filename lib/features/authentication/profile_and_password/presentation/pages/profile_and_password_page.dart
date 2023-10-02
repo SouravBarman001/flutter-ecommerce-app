@@ -1,224 +1,123 @@
+import 'package:core/core.dart';
+import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/authentication/profile_and_password/presentation/riverpod/profile_and_password_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:input_form_field/input_form_field.dart';
-import '../../../../../core/constant/media_query_size.dart';
-import '../../../../../core/constant/text_style.dart';
+part '../widgets/profile_and_password_bottom_navigation.dart';
+part '../widgets/profile_name.dart';
 
-class ProfileAndPassword extends StatefulWidget {
+class ProfileAndPassword extends ConsumerStatefulWidget {
   const ProfileAndPassword({super.key});
 
   @override
-  State<ProfileAndPassword> createState() => _ProfileAndPasswordState();
+  ConsumerState<ProfileAndPassword> createState() => _ProfileAndPasswordState();
 }
 
-class _ProfileAndPasswordState extends State<ProfileAndPassword> {
-  final TextEditingController _textEditingControllerOne =
-      TextEditingController();
-  final TextEditingController _textEditingControllerTwo =
-      TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  bool passwordVisible = false;
-  bool _isValid = false;
-
-  @override
-  void initState() {
-    super.initState();
-    passwordVisible = true;
-  }
-
-  void _saveForm(context, String gmail) {
-    setState(() {
-      _isValid = _formKey.currentState!.validate();
-      if (_isValid == true) {}
-    });
-  }
-
+class _ProfileAndPasswordState extends ConsumerState<ProfileAndPassword> {
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height;
-    width = MediaQuery.of(context).size.width;
+    // final state = ref.watch(profileAndPasswordProvider);
+    final notifier = ref.read(profileAndPasswordProvider.notifier);
 
     return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      onTap: (){
+        notifier.validate();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 100,
+          toolbarHeight: 80.h,
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        bottomNavigationBar: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          // color: Colors.blue,
-          height: 100,
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  _saveForm(context, _textEditingControllerOne.text);
-                  HapticFeedback.mediumImpact();
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 50,
-                  width: width * .8,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff3669C9),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    'Confirmation',
-                    style: AppTextStyle.textStyleOne(
-                      Colors.white,
-                      14.0,
-                      FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        bottomNavigationBar:  _ProfileAndPasswordBottomNavigation(),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: SingleChildScrollView(
               child: Form(
-                key: _formKey,
+                key: notifier.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: height * 0.04,
+                      height: 0.04.sw,
                     ),
-                    const Text(
-                      'Profile & Password',
+                     const Text(
+                      Strings.profileAndPassword,
                       style: AppTextStyle.headLineOne,
                     ),
-                    const SizedBox(
-                      height: 10,
+                     SizedBox(
+                      height: 10.h,
                     ),
                     SizedBox(
                       child: Text(
-                        'Complete the following final data '
-                        'to enter the Mega Mall application',
+                        Strings.profileAndPasswordDescription,
                         style: AppTextStyle.textStyleOne(
                           const Color(0xff838589),
-                          15.0,
+                          13.sp,
                           FontWeight.w400,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 50,
+                     SizedBox(
+                      height: 40.h,
+                    ),
+                    const _ProfileName(),
+                     SizedBox(
+                      height: 25.h,
                     ),
                     const Text(
-                      'Full Name',
+                      Strings.password,
                       style: AppTextStyle.smallTextTwo,
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: 45,
-                      padding: const EdgeInsets.only(top: 12, left: 10),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color(0xfffafafa),
-                      ),
-                      child: Text(
-                        'Sourav Barman',
-                        style: AppTextStyle.textStyleOne(
-                          Colors.black,
-                          14.0,
-                          FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Text(
-                      'Password',
-                      style: AppTextStyle.smallTextTwo,
-                    ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 15.h,
                     ),
                     InputFormField(
-                      borderRadius: BorderRadius.circular(10),
-                      fillColor: const Color(0xfffafafa),
-                      obscureText: passwordVisible,
+                      password: EnabledPassword(),
                       obscuringCharacter: '*',
-                      textEditingController: _textEditingControllerTwo,
-                      validator: (value) {
-                        final RegExp regex = RegExp(
-                          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
-                        );
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
-                        } else {
-                          if (!regex.hasMatch(value)) {
-                            return 'Enter strong password '
-                                'with a minimum of 8 characters';
-                          } else {
-                            return null;
-                          }
-                        }
-                      },
+                      borderRadius: BorderRadius.circular(10),
+                      fillColor: const Color(0xfffafafa),
+                      textEditingController: notifier.passwordTextField,
+                      validator: Validators.isValidPassword,
                       hintTextStyle: AppTextStyle.textStyleOne(
                         const Color(0xffC4C5C4),
-                        14.0,
+                        12.sp,
                         FontWeight.w400,
                       ),
-                      hintText: 'Enter Account Password',
+                      hintText: Strings.passwordHintText,
                       borderType: BorderType.none,
                       errorTextStyle:
-                          const TextStyle(fontSize: 13, color: Colors.red),
+                           TextStyle(fontSize: 12.sp, color: Colors.red),
                       contentPadding: const EdgeInsets.symmetric(
                         vertical: 13,
                         horizontal: 10,
                       ),
-                      suffix: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            passwordVisible = !passwordVisible;
-                          });
-                          HapticFeedback.mediumImpact();
-                        },
-                        child: passwordVisible == false
-                            ? const Icon(
-                                Icons.remove_red_eye_outlined,
-                                color: Color(0xff838589),
-                              )
-                            : const Icon(
-                                Icons.remove_red_eye,
-                                color: Colors.black,
-                              ),
-                      ),
                     ),
-                    const SizedBox(
-                      height: 30,
+                     SizedBox(
+                      height: 26.h,
                     ),
                     const Text(
-                      'Referal Code (Optional)',
+                      Strings.referalText,
                       style: AppTextStyle.smallTextTwo,
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 15.h,
                     ),
                     InputFormField(
                       borderRadius: BorderRadius.circular(10),
                       fillColor: const Color(0xfffafafa),
-                      textEditingController: _textEditingControllerOne,
+                      textEditingController: notifier.referalCodeTextField,
                       hintTextStyle: AppTextStyle.textStyleOne(
                         const Color(0xffC4C5C4),
-                        14.0,
+                        12.sp,
                         FontWeight.w400,
                       ),
-                      hintText: 'Input your code',
+                      hintText:Strings.referalHintText ,
                       borderType: BorderType.none,
                       errorTextStyle:
                           const TextStyle(fontSize: 13, color: Colors.red),
@@ -227,8 +126,8 @@ class _ProfileAndPasswordState extends State<ProfileAndPassword> {
                         horizontal: 10,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 20.h,
                     ),
                   ],
                 ),

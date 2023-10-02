@@ -1,10 +1,11 @@
 import 'package:core/core.dart';
-import 'package:ecommerce_module/core/constant/media_query_size.dart';
 import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/core/router/routers.dart';
 import 'package:ecommerce_module/features/authentication/reset_password/presentation/riverpod/reset_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:input_form_field/input_form_field.dart';
 
@@ -19,8 +20,6 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height;
-    width = MediaQuery.of(context).size.height;
 
     final state = ref.watch(resetProvider);
     final notifier = ref.read(resetProvider.notifier);
@@ -32,7 +31,7 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 100,
+          toolbarHeight: 80.h,
           backgroundColor: Colors.white,
           elevation: 0,
           leading: GestureDetector(
@@ -55,33 +54,33 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 40,
+                     SizedBox(
+                      height: 30.h,
                     ),
                     const Text(
-                      'Reset Password',
+                      Strings.resetPassword,
                       style: AppTextStyle.headLineOne,
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 15.h,
                     ),
                     Text(
-                      'Enter Email account to reset your password',
+                      Strings.resetPasswordDescription,
                       style: AppTextStyle.textStyleOne(
                         const Color(0xff838589),
-                        15,
+                        13.sp,
                         FontWeight.w400,
                       ),
                     ),
-                    const SizedBox(
-                      height: 50,
+                     SizedBox(
+                      height: 40.h,
                     ),
                     const Text(
                       'Email',
                       style: AppTextStyle.smallTextTwo,
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 15.h,
                     ),
                     InputFormField(
                       borderRadius: BorderRadius.circular(10),
@@ -93,7 +92,7 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
                         14,
                         FontWeight.w400,
                       ),
-                      hintText: 'Enter your Email Address',
+                      hintText: Strings.resetPasswordHintText,
                       borderType: BorderType.none,
                       errorTextStyle:
                           const TextStyle(fontSize: 13, color: Colors.red),
@@ -102,35 +101,19 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
                         horizontal: 10,
                       ),
                     ),
-                    const SizedBox(
-                      height: 60,
+                     SizedBox(
+                      height: 50.h,
                     ),
-                    InkWell(
-                      onTap: () {
+                    Button(
+                      label: 'Reset',
+                      onPressed: (){
 
                         if (state.isDisabled == false) {
                           context.push(
-                              '/verification/${notifier.emailField.text}',);
+                            '/${Routers.verification}/${notifier.emailField.text}',);
                         }
                         HapticFeedback.mediumImpact();
                       },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color(0xff3669C9),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          'Reset',
-                          style: AppTextStyle.textStyleOne(
-                            Colors.white,
-                            14,
-                            FontWeight.w500,
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),

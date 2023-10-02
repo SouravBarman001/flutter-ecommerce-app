@@ -7,8 +7,10 @@ class _Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Padding(
+    return  SizedBox(
+      height: 50.h,
+      width: 0.9.w,
+      child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -25,35 +25,35 @@ final GlobalKey<NavigatorState> _shellState = GlobalKey(debugLabel: 'shell');
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: '/signin',
+    initialLocation: '/${Routers.signIn}',
     navigatorKey: _rootState,
     routes: [
       GoRoute(
-        path: '/signin',
-        name: RoutersName.signIn,
+        path: '/${Routers.signIn}',
+        name: Routers.signIn,
         builder: (context, state) => SignInPage(key: state.pageKey),
       ),
       GoRoute(
-        path: '/reset',
-        name: RoutersName.reset,
+        path: '/${Routers.reset}',
+        name: Routers.reset,
         builder: (context, state) => ResetPasswordPage(key: state.pageKey),
       ),
       GoRoute(
-        path: '/signup',
-        name: RoutersName.signUp,
+        path: '/${Routers.signUp}',
+        name: Routers.signUp,
         builder: (context, state) => SignUpPage(key: state.pageKey),
       ),
       GoRoute(
-        path: '/verification/:name',
-        name: RoutersName.verification,
+        path: '/${Routers.verification}/:name',
+        name: Routers.verification,
         builder: (context, state) {
           final name = state.pathParameters['name']!;
           return VerificationPage(key: state.pageKey, userEmail: name);
         },
       ),
       GoRoute(
-        path: '/reg-verification/:email',
-        name: RoutersName.regVerification,
+        path: '/${Routers.registrationVerification}/:email',
+        name: Routers.registrationVerification,
         builder: (context, state) {
           final email = state.pathParameters['email']!;
           return RegistrationVerificationPage(
@@ -63,36 +63,36 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
       ),
       GoRoute(
-        path: '/update-new-password',
-        name: RoutersName.updateNewPassword,
+        path: '/${Routers.updateNewPassword}',
+        name: Routers.updateNewPassword,
         builder: (context, state) {
           return UpdatePasswordPage(key: state.pageKey);
         },
       ),
       GoRoute(
-        path: '/profile-and-password',
-        name: RoutersName.profileAndPassword,
+        path: '/${Routers.profileAndPassword}',
+        name: Routers.profileAndPassword,
         builder: (context, state) {
           return ProfileAndPassword(key: state.pageKey);
         },
       ),
       GoRoute(
-        path: '/home',
-        name: RoutersName.homeRoot,
+        path: '/${Routers.homeRoot}',
+        name: Routers.homeRoot,
         builder: (context, state) {
           return HomePage(key: state.pageKey);
         },
         routes: <RouteBase>[
           GoRoute(
-            name: RoutersName.searchProduct,
-            path: 'search-product',
+            name: Routers.searchProduct,
+            path: Routers.searchProduct,
             builder: (BuildContext context, state) {
               return SearchProduct(key: state.pageKey);
             },
           ),
           GoRoute(
-            name: RoutersName.categoryDetails,
-            path: 'category-details/:name',
+            name: Routers.categoryDetails,
+            path: '${Routers.categoryDetails}/:name',
             builder: (BuildContext context, state) {
               final name = state.pathParameters['name']!;
               return CategoryDetails(key: state.pageKey, categoryName: name);
@@ -102,8 +102,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(
-        path: '/product-details',
-        name: RoutersName.productDetails,
+        path: '/${Routers.productDetails}',
+        name: Routers.productDetails,
         builder: (context, state) {
           // ignore: lines_longer_than_80_chars
           final data = state.extra! as FeaturedProductModel;
@@ -114,15 +114,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
         routes: [
             GoRoute(
-              name: RoutersName.infoSeller,
-              path: 'info-seller',
+              name: Routers.infoSeller,
+              path: Routers.infoSeller,
               builder: (BuildContext context, state) {
                 return InfoSeller(key: state.pageKey);
               },
             ),
             GoRoute(
-              name: RoutersName.productReview,
-              path: 'product-review',
+              name: Routers.productReview,
+              path: Routers.productReview,
               builder: (BuildContext context, state) {
                 return ProductReviewPage(key: state.pageKey);
               },
@@ -135,8 +135,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               MainPage(key: state.pageKey, child: child),
           routes: [
             GoRoute(
-                name: RoutersName.homeShell,
-                path: '/home',
+                name: Routers.homeShell,
+                path: '/${Routers.home}',
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                       child: HomePage(
@@ -144,8 +144,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   ),);
                 },),
             GoRoute(
-                name: RoutersName.wishList,
-                path: '/wish-list',
+                name: Routers.wishList,
+                path: '/${Routers.wishList}',
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                       child: WishListPage(
@@ -153,8 +153,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   ),);
                 },),
             GoRoute(
-                name: RoutersName.order,
-                path: '/order',
+                name: Routers.order,
+                path: '/${Routers.order}',
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                       child: OrderPage(
@@ -162,8 +162,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   ),);
                 },),
             GoRoute(
-                name: RoutersName.account,
-                path: '/account',
+                name: Routers.account,
+                path: '/${Routers.account}',
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                       child: AccountPage(

@@ -1,278 +1,127 @@
+import 'package:core/core.dart';
+import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/authentication/update_password/presentation/riverpod/update_password_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:input_form_field/input_form_field.dart';
-import '../../../../../core/constant/media_query_size.dart';
-import '../../../../../core/constant/text_style.dart';
 
-class UpdatePasswordPage extends StatefulWidget {
+part '../widgets/bottom_navigation.dart';
+
+class UpdatePasswordPage extends ConsumerStatefulWidget {
   const UpdatePasswordPage({super.key});
 
   @override
-  State<UpdatePasswordPage> createState() => _UpdatePasswordPageState();
+  ConsumerState<UpdatePasswordPage> createState() => _UpdatePasswordPageState();
 }
 
-class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
-  final TextEditingController _textEditingControllerOne =
-      TextEditingController();
-  final TextEditingController _textEditingControllerTwo =
-      TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  bool passwordVisible = false;
-  bool confirmPasswordVisible = false;
-  bool _isValid = false;
-
-  @override
-  void initState() {
-    super.initState();
-    passwordVisible = true;
-    confirmPasswordVisible = true;
-  }
-
-  void _saveForm(context, String gmail, String password) {
-    setState(() {
-      _isValid = _formKey.currentState!.validate();
-      if (_isValid == true) {
-        _showMyDialog(context, gmail, password);
-      }
-    });
-  }
-
-  Future<void> _showMyDialog(context, String gmail, String password) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('User Info'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Gmail : ${gmail.toString()}'),
-                Text('Pass : ${password.toString()}'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                setState(() {
-                  _textEditingControllerOne.text = '';
-                  _textEditingControllerTwo.text = '';
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+class _UpdatePasswordPageState extends ConsumerState<UpdatePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height;
-    width = MediaQuery.of(context).size.width;
+
+    final notifier = ref.read(updatePasswordProvider.notifier);
+
 
     return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      onTap: () {
+        notifier.validate();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 100,
+          toolbarHeight: 80.h,
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        bottomNavigationBar: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          // color: Colors.blue,
-          height: 120,
-          width: width * 0.9,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              (_textEditingControllerOne.text.isNotEmpty &&
-                          _textEditingControllerTwo.text.isNotEmpty) ==
-                      false
-                  ? Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      width: width * 0.8,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffc4c5c4),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        'Save Update',
-                        style: AppTextStyle.textStyleOne(
-                            Colors.white, 14.0, FontWeight.w500,),
-                      ),
-                    )
-                  : InkWell(
-                      onTap: () {
-                        _saveForm(context, _textEditingControllerOne.text,
-                            _textEditingControllerTwo.text,);
-                        HapticFeedback.mediumImpact();
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 50,
-                        width: width * 0.8,
-                        decoration: BoxDecoration(
-                          color: const Color(0xff3669C9),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          'Save Update',
-                          style: AppTextStyle.textStyleOne(
-                              Colors.white, 14.0, FontWeight.w500,),
-                        ),
-                      ),
-                    ),
-            ],
-          ),
-        ),
+        bottomNavigationBar:  _BottomNavigation(),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: SingleChildScrollView(
               child: Form(
-                key: _formKey,
+                key: notifier.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: height * 0.04,
+                      height: 0.04.sh,
                     ),
                     const Text(
-                      'Update Password',
+                      Strings.updatePassword,
                       style: AppTextStyle.headLineOne,
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 15.h,
                     ),
                     Text(
-                      'Complete the following final data'
-                          'to enter the Mega Mall application',
+                      Strings.updatePasswordDescription,
                       style: AppTextStyle.textStyleOne(
                         const Color(0xff838589),
-                        15.0,
+                        13.sp,
                         FontWeight.w400,
                       ),
                     ),
-                    const SizedBox(
-                      height: 50,
+                     SizedBox(
+                      height: 40.h,
                     ),
                     const Text(
-                      'New Password',
+                      Strings.newPassword,
                       style: AppTextStyle.smallTextTwo,
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 15.h,
                     ),
                     InputFormField(
                       borderRadius: BorderRadius.circular(10),
                       fillColor: const Color(0xfffafafa),
-                      obscureText: passwordVisible,
+                      textEditingController: notifier.passwordFieldOne,
+                      password: EnabledPassword(),
                       obscuringCharacter: '*',
-                      textEditingController: _textEditingControllerOne,
-                      validator: (value) {
-                        final RegExp regex = RegExp(
-                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',);
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
-                        } else {
-                          if (!regex.hasMatch(value)) {
-                            return 'Enter strong password with'
-                                   ' a minimum of 8 characters';
-                          } else {
-                            return null;
-                          }
-                        }
-                      },
+                      validator: Validators.isValidPassword,
                       hintTextStyle: AppTextStyle.textStyleOne(
                         const Color(0xffC4C5C4),
-                        14.0,
+                        12.sp,
                         FontWeight.w400,
                       ),
-                      hintText: 'Enter New Password',
+                      hintText: Strings.newPasswordHints,
                       borderType: BorderType.none,
                       errorTextStyle:
                           const TextStyle(fontSize: 13, color: Colors.red),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 13, horizontal: 10,),
-                      suffix: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            passwordVisible = !passwordVisible;
-                          });
-                          HapticFeedback.mediumImpact();
-                        },
-                        child: passwordVisible == false
-                            ? const Icon(Icons.remove_red_eye_outlined,
-                                color: Color(0xff838589),)
-                            : const Icon(
-                                Icons.remove_red_eye,
-                                color: Colors.black,
-                              ),
-                      ),
                     ),
-                    const SizedBox(
-                      height: 30,
+                     SizedBox(
+                      height: 20.h,
                     ),
                     const Text(
-                      'Confirm New Password',
+                      Strings.confirmPassword,
                       style: AppTextStyle.smallTextTwo,
                     ),
-                    const SizedBox(
-                      height: 20,
+                     SizedBox(
+                      height: 15.h,
                     ),
                     InputFormField(
                       borderRadius: BorderRadius.circular(10),
                       fillColor: const Color(0xfffafafa),
-                      obscureText: confirmPasswordVisible,
+                      password: EnabledPassword(),
                       obscuringCharacter: '*',
-                      textEditingController: _textEditingControllerTwo,
-                      validator: (value) {
-                        final RegExp regex = RegExp(
-                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',);
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
-                        } else if (!regex.hasMatch(value)) {
-                          return 'Enter strong password with a '
-                                    'minimum of 8 characters';
-                        } else if (_textEditingControllerOne.text !=
-                            _textEditingControllerTwo.text) {
-                          return 'Two password fields must be equal';
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: Validators.isValidPassword,
+                      textEditingController: notifier.passwordFieldTwo,
+
                       hintTextStyle: AppTextStyle.textStyleOne(
                         const Color(0xffC4C5C4),
-                        14.0,
+                        12.sp,
                         FontWeight.w400,
                       ),
-                      hintText: 'Confirm New Password',
+                      hintText: Strings.confirmPasswordHints,
                       borderType: BorderType.none,
                       errorTextStyle:
-                          const TextStyle(fontSize: 13, color: Colors.red),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 13, horizontal: 10,),
-                      suffix: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            confirmPasswordVisible = !confirmPasswordVisible;
-                          });
-                          HapticFeedback.mediumImpact();
-                        },
-                        child: confirmPasswordVisible == false
-                            ? const Icon(Icons.remove_red_eye_outlined,
-                                color: Color(0xff838589),)
-                            : const Icon(
-                                Icons.remove_red_eye,
-                                color: Colors.black,
-                              ),
-                      ),
+                           TextStyle(fontSize: 12.sp, color: Colors.red),
+                      contentPadding:  EdgeInsets.symmetric(
+                          vertical: 12.sp, horizontal: 10,),
+
                     ),
                   ],
                 ),

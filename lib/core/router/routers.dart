@@ -1,5 +1,5 @@
-class RoutersName{
-
+class Routers{
+  static String home = 'home';
   static String homeRoot = 'home-root';
   static String homeShell = 'home-shell';
   static String root = 'root';
@@ -10,13 +10,13 @@ class RoutersName{
   static String signUp = 'sign-up';
   static String reset = 'reset';
   static String verification = 'verification';
-  static String regVerification = 'reg-verification';
+  static String registrationVerification = 'registration-verification';
   static String updateNewPassword = 'update-new-password';
   static String profileAndPassword = 'profile-and-password';
   static String productDetails = 'product-details';
   static String searchProduct = 'search-product';
   static String categoryDetails = 'category-details';
-  static String bottomNav = 'bottom-nav';
+  static String bottomNavigation = 'bottom-nav';
   static String wishList = 'wish-list';
   static String order = 'order';
   static String account = 'account';

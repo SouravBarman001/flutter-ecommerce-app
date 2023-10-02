@@ -47,4 +47,14 @@ class Validators {
       }
     }
   }
+
+  static String? inValidOTP(String? otp) {
+    if (otp == null || otp.isEmpty) {
+      return 'This field is required';
+    } else if (otp.length < 4) {
+      return 'All fields must be completed';
+    }
+    return null;
+  }
+
 }

@@ -9,14 +9,14 @@ class _ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/reset');
+        context.push('/${Routers.reset}');
         HapticFeedback.mediumImpact();
       },
       child: Text(
         'Forgot Password',
         style: AppTextStyle.textStyleOne(
           Colors.black,
-          15.0,
+          13.sp,
           FontWeight.w500,
         ),
       ),

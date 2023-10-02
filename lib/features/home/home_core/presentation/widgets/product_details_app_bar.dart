@@ -27,7 +27,7 @@ class ProductDetailsAppbar extends StatelessWidget
             child: InkWell(
               onTap: () {
                 HapticFeedback.vibrate();
-                context.goNamed(RoutersName.homeRoot);
+                context.goNamed(Routers.homeRoot);
               },
               child: const Icon(
                 Icons.arrow_back_ios_new,

@@ -8,6 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:input_form_field/input_form_field.dart';
 
+import '../../../../../core/router/routers.dart';
+
 part '../widgets/footer.dart';
 part '../widgets/forgot_password.dart';
 part '../widgets/sign_up.dart';
