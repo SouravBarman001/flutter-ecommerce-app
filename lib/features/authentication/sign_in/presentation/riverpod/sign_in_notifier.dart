@@ -7,15 +7,15 @@ class SignInNotifier extends Notifier<SignInState> {
 
   @override
   SignInState build() {
-    return SignInState(isDisabled: false);
+    return SignInState(isDisabled: true);
   }
 
   void _enableButton() {
-    state = SignInState(isDisabled: true);
+    state = SignInState(isDisabled: false);
   }
 
   void _disableButton() {
-    state = SignInState(isDisabled: false);
+    state = SignInState(isDisabled: true);
   }
 
   Future<void> validate() async {

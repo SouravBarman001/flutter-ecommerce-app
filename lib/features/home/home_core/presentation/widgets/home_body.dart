@@ -1,8 +1,26 @@
 part of '../pages/home_page.dart';
 
-class _HomeBody extends StatelessWidget {
+class HomeBody extends ConsumerStatefulWidget {
+  const HomeBody({super.key});
 
- final Map<String, String> featuredItems = {
+
+  @override
+  ConsumerState<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends ConsumerState<HomeBody> {
+
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Future((){
+  //     ref.read(featuredProductNotifierProvider.notifier).fetchFeaturedProduct();
+  //   });
+  // }
+
+
+  final Map<String, String> featuredItems = {
     'Premium chair':
     'https://servex-us.com/wp-content/uploads/2019/11/3d-visualization-white-background-renderings-office-furniture-manufacturers-LP7.jpg',
     'Skin formula':
@@ -41,7 +59,7 @@ class _HomeBody extends StatelessWidget {
               ),
             ],
           ),
-          FeaturedItems(),
+          const FeaturedItems(),
           const SizedBox(
             height: 10,
           ),

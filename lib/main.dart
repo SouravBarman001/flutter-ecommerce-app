@@ -17,6 +17,14 @@ class MyApp extends ConsumerStatefulWidget {
 
 class _MyAppState extends ConsumerState<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    Future(() {
+      ref.read(cacheServiceProvider).init();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final router = ref.watch(goRouterProvider);
     return ScreenUtilInit(

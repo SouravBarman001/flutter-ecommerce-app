@@ -18,7 +18,7 @@ class _CategoryProductItems extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               HapticFeedback.heavyImpact();
-              context.go('/home/category-details/$key');
+              context.go('/${Routers.homeRoot}/category-details/$key');
             },
             child: Container(
               height: 80,

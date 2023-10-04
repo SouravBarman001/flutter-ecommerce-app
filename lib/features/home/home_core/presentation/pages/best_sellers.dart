@@ -18,11 +18,9 @@ void _actionPopPup(BuildContext context) {
     builder: (ctx) => AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(10.0),
+          Radius.circular(10),
         ),
       ),
-      insetPadding: const EdgeInsets.all(0.0),
-      contentPadding: const EdgeInsets.all(0.0),
       content: SizedBox(
         width: MediaQuery.of(context).size.width - 100,
         child: ProductActionDialog(
