@@ -6,20 +6,15 @@ class MainPage extends StatefulWidget {
   final Widget child;
 
   @override
-  State<MainPage> createState() =>
-      _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState
-    extends State<MainPage> {
-
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    return
-     Scaffold(
-       body: widget.child,
-       bottomNavigationBar: const BottomNavBar(),
-      );
-
+    return Scaffold(
+      body: widget.child,
+      bottomNavigationBar: const BottomNavBar(),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/core/router/routers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,7 +78,7 @@ class _CategoryDialogState extends State<CategoryDialog> {
                     return GestureDetector(
                       onTap: () {
                         HapticFeedback.heavyImpact();
-                        context.go('/home/category-details/$key');
+                        context.go('/${Routers.homeRoot}/category-details/$key');
                         Navigator.of(widget.ctx).pop();
                       },
                       child: Container(

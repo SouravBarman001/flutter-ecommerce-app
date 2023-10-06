@@ -3,7 +3,7 @@ part of '../pages/home_page.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({required this.data, super.key});
-  final FeaturedProductModel data;
+  final FeaturedModel data;
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -34,7 +34,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
-                      widget.data.imgUrl.toString(),
+                      widget.data.image,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -52,7 +52,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        widget.data.name.toString(),
+                        'product-name',
                         style: AppTextStyle.textStyleOne(
                           Colors.black,
                           24,
@@ -70,17 +70,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                       Row(
                         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.star,
                                   color: Color(0xffFFC120),
                                   size: 18,
                                 ),
                                 Text(
-                                  widget.data.rating.toString(),
-                                  style: const TextStyle(
+                                  '4',
+                                  style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -88,11 +88,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ],
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             flex: 2,
                             child: Text(
-                              '${widget.data.review} Reviews',
-                              style: const TextStyle(
+                              '3 Reviews',
+                              style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),

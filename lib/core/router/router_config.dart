@@ -9,6 +9,7 @@ import 'package:ecommerce_module/features/authentication/verification/presentati
 import 'package:ecommerce_module/features/authentication/verification/presentation/pages/verification_page.dart';
 import 'package:ecommerce_module/features/home/category_details/presentation/pages/category_details.dart';
 import 'package:ecommerce_module/features/home/home_core/data/domain/featured_product_model.dart';
+import 'package:ecommerce_module/features/home/home_core/data/models/feature_product_model.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/pages/home_page.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/pages/main_page.dart';
 import 'package:ecommerce_module/features/home/home_core/presentation/pages/product_review_page.dart';
@@ -106,7 +107,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: Routers.productDetails,
         builder: (context, state) {
           // ignore: lines_longer_than_80_chars
-          final data = state.extra! as FeaturedProductModel;
+          final data = state.extra! as FeaturedModel;
           return ProductDetails(
             key: state.pageKey,
             data: data,

@@ -1,9 +1,9 @@
+import 'package:ecommerce_module/core/router/routers.dart';
+import 'package:ecommerce_module/features/home/home_core/presentation/riverpod/bottom_nav_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import '../providers/bottom_nav_provider.dart';
 
 class BottomNavBar extends ConsumerStatefulWidget {
   const BottomNavBar({super.key});
@@ -55,17 +55,13 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
     HapticFeedback.mediumImpact();
     switch (index) {
       case 0:
-        context.go('/home');
-        break;
+        context.go('/${Routers.home}');
       case 1:
-        context.go('/wish-list');
-        break;
+        context.go('/${Routers.wishList}');
       case 2:
-        context.go('/order');
-        break;
+        context.go('/${Routers.order}');
       case 3:
-        context.go('/account');
-        break;
+        context.go('/${Routers.account}');
     }
   }
 }

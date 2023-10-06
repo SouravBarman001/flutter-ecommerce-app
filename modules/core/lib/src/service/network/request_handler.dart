@@ -1,8 +1,7 @@
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
+import 'package:core/core.dart';
 
-import 'error_model.dart';
 import 'src/failures.dart';
 
 extension FutureResponseExtension on Future<Response> {
@@ -21,6 +20,14 @@ extension FutureResponseExtension on Future<Response> {
       ErrorModel errorModel = ErrorModel.fromJson(e.error);
 
       return (errorModel, null);
+    } catch (e, stackTrace) {
+      log(e.toString());
+      log(stackTrace.toString());
+
+      Log.error(e.toString());
+      Log.error(stackTrace.toString());
+
+      return (ErrorModel(), null);
     }
   }
 }
