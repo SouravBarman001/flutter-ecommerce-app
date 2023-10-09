@@ -8,11 +8,11 @@ import 'package:ecommerce_module/features/authentication/update_password/present
 import 'package:ecommerce_module/features/authentication/verification/presentation/pages/registration_verification_pages.dart';
 import 'package:ecommerce_module/features/authentication/verification/presentation/pages/verification_page.dart';
 import 'package:ecommerce_module/features/home/category_details/presentation/pages/category_details.dart';
-import 'package:ecommerce_module/features/home/home_core/data/domain/featured_product_model.dart';
-import 'package:ecommerce_module/features/home/home_core/data/models/feature_product_model.dart';
-import 'package:ecommerce_module/features/home/home_core/presentation/pages/home_page.dart';
-import 'package:ecommerce_module/features/home/home_core/presentation/pages/main_page.dart';
-import 'package:ecommerce_module/features/home/home_core/presentation/pages/product_review_page.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/data/models/feature_product_model.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/home_page.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/main_page.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/product_review_page.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/see_all_product_page.dart';
 import 'package:ecommerce_module/features/home/info_seller/presentation/pages/info_seller.dart';
 import 'package:ecommerce_module/features/home/search_product/presentation/pages/search_product.dart';
 import 'package:ecommerce_module/features/order/presentation/pages/order_page.dart';
@@ -89,6 +89,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             path: Routers.searchProduct,
             builder: (BuildContext context, state) {
               return SearchProduct(key: state.pageKey);
+            },
+          ),
+          GoRoute(
+            name: Routers.seeAllProducts,
+            path: Routers.seeAllProducts,
+            builder: (BuildContext context, state) {
+              return SeeAllProductsPage(key: state.pageKey);
             },
           ),
           GoRoute(

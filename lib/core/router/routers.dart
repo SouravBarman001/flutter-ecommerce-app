@@ -22,5 +22,6 @@ class Routers{
   static String account = 'account';
   static String infoSeller = 'info-seller';
   static String productReview = 'product-review';
+  static String seeAllProducts = 'see-all-products';
 
 }
