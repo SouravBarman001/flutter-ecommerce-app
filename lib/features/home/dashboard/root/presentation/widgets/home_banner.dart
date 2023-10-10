@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerce_module/features/home/home_core/presentation/widgets/constant/product_resource.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/widgets/constant/product_resource.dart';
 import 'package:flutter/material.dart';
 
 class HomeBanner extends StatefulWidget {

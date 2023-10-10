@@ -49,12 +49,18 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
                   FontWeight.w600,
                 ),
               ),
-              Text(
-                'See All',
-                style: AppTextStyle.textStyleOne(
-                  Colors.blue,
-                  16,
-                  FontWeight.w600,
+              GestureDetector(
+                onTap: (){
+                  context.go(
+                    '/${Routers.homeRoot}/${Routers.seeAllProducts}',);
+                },
+                child: Text(
+                  'See All',
+                  style: AppTextStyle.textStyleOne(
+                    Colors.blue,
+                    16,
+                    FontWeight.w600,
+                  ),
                 ),
               ),
             ],

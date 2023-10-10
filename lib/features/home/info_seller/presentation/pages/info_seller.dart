@@ -1,12 +1,13 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:ecommerce_module/core/constant/text_style.dart';
-import 'package:ecommerce_module/features/home/home_core/data/domain/featured_product_model.dart';
 import 'package:ecommerce_module/features/home/info_seller/presentation/widgets/helper/seller_info_dialog_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../dashboard/root/data/domain/featured_product_model.dart';
 part '../widgets/seller_app_bar.dart';
 part '../widgets/seller_bottom_bar.dart';
 part '../widgets/seller_products.dart';

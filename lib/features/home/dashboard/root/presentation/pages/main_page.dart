@@ -1,4 +1,4 @@
-import 'package:ecommerce_module/features/home/home_core/presentation/pages/bottom_nav.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {

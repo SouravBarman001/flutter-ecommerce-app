@@ -1,7 +1,8 @@
 import 'package:ecommerce_module/core/constant/text_style.dart';
-import 'package:ecommerce_module/features/home/home_core/data/domain/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../data/domain/user_model.dart';
 
 
 class DetailsProductReview extends StatelessWidget {

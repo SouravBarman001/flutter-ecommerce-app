@@ -1,17 +1,12 @@
 import 'package:ecommerce_module/core/constant/text_style.dart';
-import 'package:ecommerce_module/features/home/home_core/data/domain/featured_product_model.dart';
-import 'package:ecommerce_module/features/home/home_core/presentation/pages/home_page.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-
-
-// part of '../../../home_core/presentation/pages/home_page.dart';
-part '../widgets/search_page_app_bar.dart';
 part '../widgets/product_search_fuctionality.dart';
+part '../widgets/search_page_app_bar.dart';
 
 class SearchProduct extends StatefulWidget {
   const SearchProduct({super.key});

@@ -1,19 +1,38 @@
 import 'package:ecommerce_module/core/constant/text_style.dart';
-import 'package:ecommerce_module/features/home/home_core/presentation/widgets/helper/dialog_helper.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/widgets/product_action_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 @immutable
-class NewArrival extends StatefulWidget {
-  const NewArrival({required this.featuredItems, super.key});
+class BestSellers extends StatefulWidget {
+  const BestSellers({required this.featuredItems, super.key});
   final Map featuredItems;
 
   @override
-  State<NewArrival> createState() => _NewArrivalState();
+  State<BestSellers> createState() => _BestSellersState();
 }
 
-class _NewArrivalState extends State<NewArrival> {
+
+void _actionPopPup(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      content: SizedBox(
+        width: MediaQuery.of(context).size.width - 100,
+        child: ProductActionDialog(
+          ctx: ctx,
+        ),
+      ),
+    ),
+  );
+}
 
 
+class _BestSellersState extends State<BestSellers> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,7 +49,7 @@ class _NewArrivalState extends State<NewArrival> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.network(
-                'https://mir-s3-cdn-cf.behance.net/project_modules/disp/ba082b144831311.6293af8f7a9d8.png',
+                'https://graphicsfamily.com/wp-content/uploads/edd/2022/12/E-commerce-Product-Banner-Design-scaled.jpg',
                 fit: BoxFit.cover,),
           ),
         ),
@@ -41,10 +60,10 @@ class _NewArrivalState extends State<NewArrival> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'New Arrivals',
+              'Best Sellers',
               style: AppTextStyle.textStyleOne(
                 Colors.black,
-                16,
+                16.0,
                 FontWeight.w600,
               ),
             ),
@@ -52,7 +71,7 @@ class _NewArrivalState extends State<NewArrival> {
               'See All',
               style: AppTextStyle.textStyleOne(
                 Colors.blue,
-                16,
+                16.0,
                 FontWeight.w600,
               ),
             ),
@@ -74,7 +93,7 @@ class _NewArrivalState extends State<NewArrival> {
               final key = entry.key;
               final value = entry.value;
               return GestureDetector(
-                onTap: HapticFeedback.heavyImpact,
+                onTap: () => HapticFeedback.heavyImpact(),
                 child: Container(
                   height: 242,
                   width: 156,
@@ -87,6 +106,7 @@ class _NewArrivalState extends State<NewArrival> {
                       top: 5, right: 5, left: 5, bottom: 5,),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Display the key
                       Expanded(
@@ -115,13 +135,13 @@ class _NewArrivalState extends State<NewArrival> {
                               Text(
                                 key.toString(),
                                 style: AppTextStyle.textStyleOne(
-                                    Colors.black, 14, FontWeight.w600,),
+                                    Colors.black, 14.0, FontWeight.w600,),
                               ),
                               Text(
                                 'Rp. 1.500.000',
                                 style: AppTextStyle.textStyleOne(
                                     const Color(0xffFE3A30),
-                                    14,
+                                    14.0,
                                     FontWeight.w700,),
                               ),
                                Row(
@@ -155,8 +175,8 @@ class _NewArrivalState extends State<NewArrival> {
                                   Flexible(
                                       flex: 2,
                                       child: GestureDetector(
-                                        onTap: (){
-                                          DialogHelper.actionPopPup(context);
+                                        onTap: () {
+                                          _actionPopPup(context);
                                           HapticFeedback.mediumImpact();
                                         },
                                         child: const Icon(
