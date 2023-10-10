@@ -1,8 +1,6 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:core/core.dart';
 import 'package:ecommerce_module/core/constant/text_style.dart';
-import 'package:ecommerce_module/features/home/dashboard/root/data/domain/featured_product_model.dart';
-import 'package:ecommerce_module/features/home/dashboard/root/data/models/feature_product_model.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/riverpod/featured_product_provider.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/widgets/helper/dialog_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,40 +24,28 @@ class SeeAllProductsPage extends ConsumerStatefulWidget {
 class _SeeAllProductsPageState extends ConsumerState<SeeAllProductsPage> {
   FocusNode myFocusNode = FocusNode();
 
-
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final notifier = ref.watch(featuredProductNotifierProvider.notifier);
-    notifier.scrollController.addListener(_scrollListener);
-
-  }
-  void _scrollListener(){
-    Log.debug('ScrollController called');
-    print('ScrollController called');
-  }
-
-
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.watch(featuredProductNotifierProvider.notifier);
-
     return GestureDetector(
       onTap: () {
         myFocusNode.unfocus();
       },
       child: Scaffold(
         appBar: _SeeAllProductsAppBar(),
-        body: ListView(
-          controller: notifier.scrollController,
-          children: [
-            SeeAllProductsSearch(
-              categoryName: 'Featured Products',
-              focusNode: myFocusNode,
-            ),
-            const SeeAllProductsSection(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SeeAllProductsSearch(
+                categoryName: 'Featured Products',
+                focusNode: myFocusNode,
+              ),
+              SizedBox(
+                height: ScreenUtil().screenHeight * 0.7,
+                width: double.infinity,
+                child: const SeeAllProductsSection(),
+              ),
+            ],
+          ),
         ),
       ),
     );
