@@ -1,4 +1,3 @@
-
 part of '../pages/home_page.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -10,13 +9,12 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar:const ProductDetailsAppbar(),
+      appBar: const ProductDetailsAppbar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -261,7 +259,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -283,7 +283,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ],
                 ),
-                 const FeaturedItems(),
+                const FeaturedItems(),
                 const SizedBox(
                   height: 10,
                 ),

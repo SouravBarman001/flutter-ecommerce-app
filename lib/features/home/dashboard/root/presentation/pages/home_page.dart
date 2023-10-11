@@ -5,8 +5,8 @@ import 'package:ecommerce_module/core/router/routers.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/data/models/feature_product_model.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/best_sellers.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/new_arrival.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/presentation/riverpod/category_item_provider.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/riverpod/featured_product_provider.dart';
-import 'package:ecommerce_module/features/home/dashboard/root/presentation/widgets/constant/product_resource.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/widgets/details_product_review.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/widgets/helper/dialog_helper.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/widgets/home_app_bar.dart';
@@ -18,8 +18,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:input_form_field/input_form_field.dart';
-
-import '../riverpod/category_item_provider.dart';
 
 part './product_details.dart';
 part '../widgets/category_product_items.dart';
@@ -35,15 +33,13 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-
   @override
   void initState() {
     super.initState();
-    Future((){
+    Future(() {
       ref.read(featuredProductNotifierProvider.notifier).fetchFeaturedProduct();
     });
   }
-
 
   final _searchController = TextEditingController();
 
@@ -59,7 +55,6 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();

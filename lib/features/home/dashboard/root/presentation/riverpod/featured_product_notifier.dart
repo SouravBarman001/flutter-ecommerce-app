@@ -8,6 +8,7 @@ class FeaturedProductNotifier extends Notifier<BaseState> {
   late final FeaturedProductUseCases featuredProductUseCases;
   final ScrollController scrollController = ScrollController();
   final List<FeaturedModel> limitList = [];
+  late List<FeaturedModel> allProducts = [];
   int limitData = 5;
 
   @override
@@ -40,7 +41,6 @@ class FeaturedProductNotifier extends Notifier<BaseState> {
       } else if (featuredModels!.isNotEmpty) {
         state = state.copyWith(
           status: Status.success,
-          //  data: featuredModels,
         );
         limitList.addAll(featuredModels);
       }
@@ -77,6 +77,7 @@ class FeaturedProductNotifier extends Notifier<BaseState> {
           status: Status.success,
           data: featuredModels,
         );
+        allProducts.addAll(featuredModels);
       }
     } catch (e) {
       state = state.copyWith(

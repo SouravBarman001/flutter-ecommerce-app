@@ -1,10 +1,13 @@
 import 'package:badges/badges.dart' as badges;
+import 'package:core/core.dart';
 import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/features/home/category_details/presentation/riverpod/category_details_provider.dart';
 import 'package:ecommerce_module/features/home/category_details/presentation/widgets/helper/category_details_dialog_helper.dart';
-import 'package:ecommerce_module/features/home/dashboard/root/data/domain/featured_product_model.dart';
+import 'package:ecommerce_module/features/home/dashboard/root/data/models/feature_product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,7 +41,9 @@ class _CategoryDetailsState extends State<CategoryDetails> {
             children: [
               _CategorySearch(
                   categoryName: widget.categoryName, focusNode: myFocusNode,),
-              _CategoryProducts(),
+               _CategoryProducts(
+                  categoryName: widget.categoryName,
+              ),
             ],
           ),
         ),
