@@ -1,22 +1,21 @@
 part of '../pages/category_details.dart';
 
-
-class _CategorySearch extends StatefulWidget {
-  const _CategorySearch({required this.categoryName,required this.focusNode});
+class _CategorySearch extends ConsumerStatefulWidget {
+  const _CategorySearch({required this.categoryName, required this.focusNode});
   final String categoryName;
   final FocusNode focusNode;
 
   @override
-  State<_CategorySearch> createState() => _CategorySearchState();
+  ConsumerState<_CategorySearch> createState() => _CategorySearchState();
 }
 
-class _CategorySearchState extends State<_CategorySearch> {
-  final TextEditingController _searchController = TextEditingController();
-  final List<String> _recentSearches = [];
+class _CategorySearchState extends ConsumerState<_CategorySearch> {
   bool recentSearch = false;
 
   @override
   Widget build(BuildContext context) {
+    final notifier = ref.read(categoryFilteredNotifierProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -59,14 +58,18 @@ class _CategorySearchState extends State<_CategorySearch> {
                     ),
                     suffixIcon: GestureDetector(
                       onTap: () {
+
+                        notifier.searchProducts(
+                          notifier.searchController.text,
+                          widget.categoryName,
+                        );
                         setState(() {
                           // Perform search here
-                          final searchTerm =
-                              _searchController.text;
+                          final searchTerm = notifier.searchController.text;
                           // Add the search term to recent searches
                           if (searchTerm.isNotEmpty) {
-                            _recentSearches.add(searchTerm);
-                            _searchController.clear();
+                            notifier.recentSearches.add(searchTerm);
+                            notifier.searchController.clear();
                           }
                         });
                       },
@@ -79,15 +82,14 @@ class _CategorySearchState extends State<_CategorySearch> {
                   ),
                   onEditingComplete: () {
                     setState(() {
-                      final searchTerm =
-                          _searchController.text;
+                      final searchTerm = notifier.searchController.text;
                       // Add the search term to recent searches
                       if (searchTerm.isNotEmpty) {
-                        _recentSearches.add(searchTerm);
+                        notifier.recentSearches.add(searchTerm);
                         recentSearch = false;
-                        _searchController.clear();
+                        notifier.searchController.clear();
                       } else if (searchTerm.isEmpty) {
-                        _searchController.clear();
+                        notifier.searchController.clear();
                         recentSearch = false;
                       }
                     });
@@ -97,96 +99,96 @@ class _CategorySearchState extends State<_CategorySearch> {
                       recentSearch = !recentSearch;
                     });
                   },
-                  controller: _searchController,
+                  controller: notifier.searchController,
                 ),
-                if (recentSearch == true) Container(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                    children: [
-                      const Divider(
-                        thickness: 0.5,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        'Recent Searches',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                if (recentSearch == true)
+                  Container(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Divider(
+                          thickness: 0.5,
+                          color: Colors.grey,
                         ),
-                      ),
-                      ListView.builder(
-                        // reverse: true,
-                        shrinkWrap: true,
-                        itemCount: _recentSearches.length > 5
-                            ? 5
-                            : _recentSearches.length,
-                        itemBuilder: (BuildContext context,
-                            int index,) {
-                          final reversedIndex =
-                              _recentSearches.length -
-                                  1 -
-                                  index;
-                          return SizedBox(
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.search,),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        _recentSearches[
-                                        reversedIndex],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    alignment:
-                                    Alignment.centerRight,
-                                    child: IconButton(
-                                      icon: const Icon(
-                                        Icons.clear,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          _recentSearches
-                                              .removeAt(
-                                            reversedIndex,
-                                          );
-                                        });
-                                      },
+                        const SizedBox(height: 10),
+                        const Text(
+                          'Recent Searches',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        ListView.builder(
+                          // reverse: true,
+                          shrinkWrap: true,
+                          itemCount: notifier.recentSearches.length > 5
+                              ? 5
+                              : notifier.recentSearches.length,
+                          itemBuilder: (
+                            BuildContext context,
+                            int index,
+                          ) {
+                            final reversedIndex =
+                                notifier.recentSearches.length - 1 - index;
+                            return SizedBox(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.search,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          notifier
+                                              .recentSearches[reversedIndex],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {
-                            setState(_recentSearches.clear);
+                                  Expanded(
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      child: IconButton(
+                                        icon: const Icon(
+                                          Icons.clear,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            notifier.recentSearches.removeAt(
+                                              reversedIndex,
+                                            );
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
                           },
-                          child: const Text('Clear All'),
                         ),
-                      ),
-                    ],
-                  ),
-                ) else Container(),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              setState(notifier.recentSearches.clear);
+                            },
+                            child: const Text('Clear All'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  Container(),
               ],
             ),
           ),

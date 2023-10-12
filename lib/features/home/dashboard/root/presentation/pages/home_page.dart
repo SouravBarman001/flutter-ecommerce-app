@@ -33,13 +33,6 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    Future(() {
-      ref.read(featuredProductNotifierProvider.notifier).fetchFeaturedProduct();
-    });
-  }
 
   final _searchController = TextEditingController();
 

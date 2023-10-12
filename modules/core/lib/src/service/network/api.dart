@@ -6,8 +6,8 @@ class API {
   /// Endpoints
   static const String login = "/auth/signin";
   static const String product = "/products?limit=5";
-  static const String allProducts = "/products";
   static const String categoryItems = "/products/categories";
+  static const String allProducts = "/products";
 
 
 }
