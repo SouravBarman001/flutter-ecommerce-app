@@ -13,7 +13,7 @@ class FeaturedDataSourceImpl implements FeaturedDataSource {
   Future<Response> featuredItems() async {
     final response = await client.get(
       APIType.public,
-      API.product,
+      API.allProducts,
     );
     return response;
   }

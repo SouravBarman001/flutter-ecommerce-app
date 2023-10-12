@@ -11,15 +11,6 @@ class HomeBody extends ConsumerStatefulWidget {
 class _HomeBodyState extends ConsumerState<HomeBody> {
 
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Future((){
-  //     ref.read(featuredProductNotifierProvider.notifier).fetchFeaturedProduct();
-  //   });
-  // }
-
-
   final Map<String, String> featuredItems = {
     'Premium chair':
     'https://servex-us.com/wp-content/uploads/2019/11/3d-visualization-white-background-renderings-office-furniture-manufacturers-LP7.jpg',

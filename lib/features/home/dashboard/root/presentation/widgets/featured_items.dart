@@ -163,8 +163,8 @@ class _FeaturedItemsState extends ConsumerState<FeaturedItems> {
         ),
       );
     } else {
-      return const Center(
-        child: Icon(Icons.error),
+      return  Center(
+        child: Text(state.data.toString()),
       );
     }
   }

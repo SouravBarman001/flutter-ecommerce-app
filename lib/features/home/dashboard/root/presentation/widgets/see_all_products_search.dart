@@ -1,23 +1,26 @@
 part of '../pages/see_all_product_page.dart';
 
-class SeeAllProductsSearch extends StatefulWidget {
-  const SeeAllProductsSearch(
-      {required this.categoryName, required this.focusNode, super.key,});
+class SeeAllProductsSearch extends ConsumerStatefulWidget {
+  const SeeAllProductsSearch({
+    required this.categoryName,
+    required this.focusNode,
+    super.key,
+  });
 
   final String categoryName;
   final FocusNode focusNode;
 
   @override
-  State<SeeAllProductsSearch> createState() => _CategorySearchState();
+  ConsumerState<SeeAllProductsSearch> createState() => _CategorySearchState();
 }
 
-class _CategorySearchState extends State<SeeAllProductsSearch> {
-  final TextEditingController _searchController = TextEditingController();
-  final List<String> _recentSearches = [];
+class _CategorySearchState extends ConsumerState<SeeAllProductsSearch> {
   bool recentSearch = false;
 
   @override
   Widget build(BuildContext context) {
+    final notifier = ref.read(featuredProductNotifierProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -58,9 +61,13 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                       vertical: 18,
                       horizontal: 15,
                     ),
-                    prefixIcon:GestureDetector(
-                      onTap: (){
-                        DialogHelper.seeAllProductsSearchFilter(context);
+                    prefixIcon: GestureDetector(
+                      onTap: () {
+                        HapticFeedback.mediumImpact();
+                        widget.focusNode.unfocus();
+                        Future.delayed(const Duration(milliseconds: 500), () {
+                          DialogHelper.seeAllProductsSearchFilter(context);
+                        });
                       },
                       child: const Icon(
                         Icons.menu_outlined,
@@ -70,13 +77,15 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                     ),
                     suffixIcon: GestureDetector(
                       onTap: () {
+                        HapticFeedback.mediumImpact();
+                        notifier.searchProducts(notifier.searchController.text);
                         setState(() {
                           // Perform search here
-                          final searchTerm = _searchController.text;
+                          final searchTerm = notifier.searchController.text;
                           // Add the search term to recent searches
                           if (searchTerm.isNotEmpty) {
-                            _recentSearches.add(searchTerm);
-                            _searchController.clear();
+                            notifier.recentSearches.add(searchTerm);
+                            notifier.searchController.clear();
                           }
                         });
                       },
@@ -89,14 +98,14 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                   ),
                   onEditingComplete: () {
                     setState(() {
-                      final searchTerm = _searchController.text;
+                      final searchTerm = notifier.searchController.text;
                       // Add the search term to recent searches
                       if (searchTerm.isNotEmpty) {
-                        _recentSearches.add(searchTerm);
+                        notifier.recentSearches.add(searchTerm);
                         recentSearch = false;
-                        _searchController.clear();
+                        notifier.searchController.clear();
                       } else if (searchTerm.isEmpty) {
-                        _searchController.clear();
+                        notifier.searchController.clear();
                         recentSearch = false;
                       }
                     });
@@ -106,7 +115,7 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                       recentSearch = !recentSearch;
                     });
                   },
-                  controller: _searchController,
+                  controller: notifier.searchController,
                 ),
                 if (recentSearch == true)
                   Container(
@@ -129,15 +138,15 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                         ListView.builder(
                           // reverse: true,
                           shrinkWrap: true,
-                          itemCount: _recentSearches.length > 5
+                          itemCount: notifier.recentSearches.length > 5
                               ? 5
-                              : _recentSearches.length,
+                              : notifier.recentSearches.length,
                           itemBuilder: (
                             BuildContext context,
                             int index,
                           ) {
                             final reversedIndex =
-                                _recentSearches.length - 1 - index;
+                                notifier.recentSearches.length - 1 - index;
                             return SizedBox(
                               child: Row(
                                 mainAxisAlignment:
@@ -154,7 +163,8 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                                           width: 10,
                                         ),
                                         Text(
-                                          _recentSearches[reversedIndex],
+                                          notifier
+                                              .recentSearches[reversedIndex],
                                         ),
                                       ],
                                     ),
@@ -168,7 +178,7 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            _recentSearches.removeAt(
+                                            notifier.recentSearches.removeAt(
                                               reversedIndex,
                                             );
                                           });
@@ -185,7 +195,7 @@ class _CategorySearchState extends State<SeeAllProductsSearch> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              setState(_recentSearches.clear);
+                              setState(notifier.recentSearches.clear);
                             },
                             child: const Text('Clear All'),
                           ),

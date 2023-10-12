@@ -7,7 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class FeaturedProductNotifier extends Notifier<BaseState> {
   late final FeaturedProductUseCases featuredProductUseCases;
   final ScrollController scrollController = ScrollController();
-  final List<FeaturedModel> limitList = [];
+
+  final TextEditingController searchController = TextEditingController();
+  final List<String> recentSearches = [];
+  late List<FeaturedModel> limitList = [];
+  late List<FeaturedModel> allProducts = [];
   int limitData = 5;
 
   @override
@@ -40,14 +44,49 @@ class FeaturedProductNotifier extends Notifier<BaseState> {
       } else if (featuredModels!.isNotEmpty) {
         state = state.copyWith(
           status: Status.success,
-          //  data: featuredModels,
         );
-        limitList.addAll(featuredModels);
+        limitList = featuredModels;
       }
     } catch (e) {
       state = state.copyWith(
         status: Status.error,
         message: e.toString(),
+      );
+    }
+  }
+
+  void searchProducts(String item) {
+    try {
+      if (limitList.isNotEmpty) {
+        final filteredList = limitList
+            .where(
+              (element) =>
+                  element.title.toLowerCase().contains(item.toLowerCase()),
+            )
+            .toList();
+
+        if (filteredList.isEmpty) {
+          state = state.copyWith(
+            status: Status.error,
+            message: 'Sorry! There is no data',
+          );
+        } else {
+          limitList.clear();
+          state = state.copyWith(
+            status: Status.success,
+          );
+          limitList = filteredList;
+        }
+      } else {
+        state = state.copyWith(
+          status: Status.error,
+          message: 'Sorry! There is no data',
+        );
+      }
+    } catch (e) {
+      state = state.copyWith(
+        status: Status.error,
+        message: 'Sorry! There is no data',
       );
     }
   }
@@ -77,6 +116,7 @@ class FeaturedProductNotifier extends Notifier<BaseState> {
           status: Status.success,
           data: featuredModels,
         );
+        allProducts = featuredModels;
       }
     } catch (e) {
       state = state.copyWith(

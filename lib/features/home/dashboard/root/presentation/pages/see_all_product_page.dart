@@ -24,6 +24,15 @@ class SeeAllProductsPage extends ConsumerStatefulWidget {
 class _SeeAllProductsPageState extends ConsumerState<SeeAllProductsPage> {
   FocusNode myFocusNode = FocusNode();
 
+  Future<void> fetchProducts() async {
+    await Future(() {
+      ref.read(featuredProductNotifierProvider.notifier).limitList.clear();
+      ref.read(featuredProductNotifierProvider.notifier).fetchLimitProduct(
+        ref.read(featuredProductNotifierProvider.notifier).limitData,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,8 +41,9 @@ class _SeeAllProductsPageState extends ConsumerState<SeeAllProductsPage> {
       },
       child: Scaffold(
         appBar: _SeeAllProductsAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
+        body: RefreshIndicator(
+          onRefresh: fetchProducts,
+          child: ListView(
             children: [
               SeeAllProductsSearch(
                 categoryName: 'Featured Products',
