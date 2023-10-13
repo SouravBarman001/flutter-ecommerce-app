@@ -13,8 +13,9 @@ class _CategoryProducts extends ConsumerStatefulWidget {
 class _CategoryProductsState extends ConsumerState<_CategoryProducts> {
   @override
   Widget build(BuildContext context) {
-    final cardWidth = ScreenUtil().screenWidth / 3.3;
-    final cardHeight = ScreenUtil().screenHeight / 5.0;
+    final cardWidth = ScreenUtil().setWidth(120);
+    final cardHeight = ScreenUtil().setHeight(150);
+
     final state = ref.watch(categoryFilteredNotifierProvider);
 
     if (state.status == Status.loading) {
@@ -22,22 +23,20 @@ class _CategoryProductsState extends ConsumerState<_CategoryProducts> {
         child: CircularProgressIndicator(),
       );
     } else if (state.status == Status.success) {
-      final List<dynamic> listItems = state.data;
-
       return SizedBox(
         child: GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // number of items in each row
-            mainAxisSpacing: 8, // spacing between rows
+            crossAxisCount: 2,
+            mainAxisSpacing: 8,
             crossAxisSpacing: 8,
             childAspectRatio: cardWidth / cardHeight,
           ),
-          padding: const EdgeInsets.all(8), // padding around the grid
-          itemCount: listItems.length, // total number of items
+          padding: const EdgeInsets.all(8),
+          itemCount: state.data.length,
           itemBuilder: (context, index) {
-             final entry = listItems[index];
+            final entry = state.data[index];
             return Container(
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(

@@ -9,15 +9,16 @@ class CategoryDetailsModel {
     required this.rating,
   });
 
-  factory CategoryDetailsModel.fromJson(Map<String, dynamic> json) => CategoryDetailsModel(
-    id: json['id'],
-    title: json['title'],
-    price: json['price']?.toDouble(),
-    description: json['description'],
-    category: json['category'],
-    image: json['image'],
-    rating: Rating.fromJson(json['rating']),
-  );
+  factory CategoryDetailsModel.fromJson(Map<String, dynamic> json) =>
+      CategoryDetailsModel(
+        id: json['id'],
+        title: json['title'],
+        price: json['price']?.toDouble(),
+        description: json['description'],
+        category: json['category'],
+        image: json['image'],
+        rating: Rating.fromJson(json['rating']),
+      );
 
   int id;
   String title;
@@ -35,9 +36,9 @@ class Rating {
   });
 
   factory Rating.fromJson(Map<String, dynamic> json) => Rating(
-    rate: json['rate']?.toDouble(),
-    count: json['count'],
-  );
+        rate: json['rate']?.toDouble(),
+        count: json['count'],
+      );
   double rate;
   int count;
 }

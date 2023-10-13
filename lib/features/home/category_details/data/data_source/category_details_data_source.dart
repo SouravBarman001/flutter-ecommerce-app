@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final categoryDetailsDataResourceProvider =
     Provider<CategoryDetailsDataSource>((ref) {
-  return CategoryDetailsDataSourceImpl(client: ref.watch(networkProvider),);
+  return CategoryDetailsDataSourceImpl(
+    client: ref.watch(networkProvider),
+  );
 });
 
 abstract class CategoryDetailsDataSource {

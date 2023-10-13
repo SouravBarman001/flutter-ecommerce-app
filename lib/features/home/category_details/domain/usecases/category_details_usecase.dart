@@ -3,15 +3,15 @@ import 'package:ecommerce_module/features/home/category_details/data/model/categ
 import 'package:ecommerce_module/features/home/category_details/domain/repositories/category_details_remote_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final categoryDetailsUseCaseProvider = Provider<CategoryDetailsUseCases>(
-  (ref) => CategoryDetailsUseCases(
+final categoryDetailsUseCaseProvider = Provider<CategoryDetailsUseCase>(
+  (ref) => CategoryDetailsUseCase(
     categoryDetailsRemoteRepository:
         ref.watch(categoryDetailsRemoteRepoProvider),
   ),
 );
 
-class CategoryDetailsUseCases {
-  CategoryDetailsUseCases({
+class CategoryDetailsUseCase {
+  CategoryDetailsUseCase({
     required this.categoryDetailsRemoteRepository,
   });
 

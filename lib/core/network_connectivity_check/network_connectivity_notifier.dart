@@ -6,36 +6,26 @@ import 'package:ecommerce_module/core/network_connectivity_check/network_connect
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ConnectivityStatusNotifier extends Notifier<ConnectivityState> {
-
   late final StreamSubscription subscription;
   @override
   ConnectivityState build() {
-
     return ConnectivityState.notDetermined();
   }
 
-
   void checkStatus() {
-
     subscription = Connectivity().onConnectivityChanged.listen((event) {
-
-      if(event == ConnectivityResult.mobile || event == ConnectivityResult.wifi){
+      if (event == ConnectivityResult.mobile ||
+          event == ConnectivityResult.wifi) {
         state = ConnectivityState.initial();
         Log.debug('internet connected');
-      }
-
-      else if(event == ConnectivityResult.none){
-        state = ConnectivityState.disconnected() ;
+      } else if (event == ConnectivityResult.none) {
+        state = ConnectivityState.disconnected();
         Log.debug('no internet connection');
-
       }
     });
-
   }
-
 
   void dispose() {
     subscription.cancel();
   }
-
 }
