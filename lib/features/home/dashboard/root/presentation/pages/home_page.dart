@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:ecommerce_module/core/constant/media_query_size.dart';
 import 'package:ecommerce_module/core/constant/text_style.dart';
+import 'package:ecommerce_module/core/network_connectivity_check/network_connectivity_provider.dart';
 import 'package:ecommerce_module/core/router/routers.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/data/models/feature_product_model.dart';
 import 'package:ecommerce_module/features/home/dashboard/root/presentation/pages/best_sellers.dart';
@@ -33,6 +34,19 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future(() {
+      ref.read(connectivityStatusProviders.notifier).checkStatus();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    ref.read(connectivityStatusProviders.notifier).dispose();
+  }
 
   final _searchController = TextEditingController();
 

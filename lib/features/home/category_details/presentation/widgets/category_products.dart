@@ -12,17 +12,6 @@ class _CategoryProducts extends ConsumerStatefulWidget {
 
 class _CategoryProductsState extends ConsumerState<_CategoryProducts> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    Future(() {
-      ref
-          .read(categoryFilteredNotifierProvider.notifier)
-          .fetchFilteredCategoryItems(widget.categoryName);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final cardWidth = ScreenUtil().screenWidth / 3.3;
     final cardHeight = ScreenUtil().screenHeight / 5.0;
@@ -33,7 +22,7 @@ class _CategoryProductsState extends ConsumerState<_CategoryProducts> {
         child: CircularProgressIndicator(),
       );
     } else if (state.status == Status.success) {
-      final List<FeaturedModel> listItems = state.data;
+      final List<dynamic> listItems = state.data;
 
       return SizedBox(
         child: GridView.builder(
@@ -48,7 +37,7 @@ class _CategoryProductsState extends ConsumerState<_CategoryProducts> {
           padding: const EdgeInsets.all(8), // padding around the grid
           itemCount: listItems.length, // total number of items
           itemBuilder: (context, index) {
-            final entry = listItems[index];
+             final entry = listItems[index];
             return Container(
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
