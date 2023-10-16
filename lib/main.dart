@@ -27,7 +27,10 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     final router = ref.watch(goRouterProvider);
+
     return ScreenUtilInit(
+      minTextAdapt: true,
+      splitScreenMode: true,
       child: AppTheme(
         themeData: const UIThemeData(),
         child: MaterialApp.router(
@@ -41,9 +44,6 @@ class _MyAppState extends ConsumerState<MyApp> {
           routerDelegate: router.routerDelegate,
         ),
       ),
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
     );
   }
 }
