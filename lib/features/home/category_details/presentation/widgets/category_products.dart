@@ -13,9 +13,6 @@ class _CategoryProducts extends ConsumerStatefulWidget {
 class _CategoryProductsState extends ConsumerState<_CategoryProducts> {
   @override
   Widget build(BuildContext context) {
-    final cardWidth = ScreenUtil().setWidth(120);
-    final cardHeight = ScreenUtil().setHeight(150);
-
     final state = ref.watch(categoryFilteredNotifierProvider);
 
     if (state.status == Status.loading) {
@@ -31,7 +28,7 @@ class _CategoryProductsState extends ConsumerState<_CategoryProducts> {
             crossAxisCount: 2,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
-            childAspectRatio: cardWidth / cardHeight,
+            childAspectRatio: 20.sw / 30.sw,
           ),
           padding: const EdgeInsets.all(8),
           itemCount: state.data.length,
