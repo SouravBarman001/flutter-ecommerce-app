@@ -31,11 +31,11 @@
      <td>Home Page</td>
   </tr>
   <tr>
-    <td><img src="/images/screenshots/login.png" width=270 ></td>
-    <td><img src="/images/screenshots/registration.png" width=270 ></td>
-    <td><img src="/images/screenshots/reset_password.png" width=270 ></td>
-    <td><img src="/images/screenshots/update_password.png" width=270 ></td>
-    <td><img src="/images/screenshots/home_page.png" width=270 ></td>
+    <td><img src="/images/screenshot/login.png" width=270 ></td>
+    <td><img src="/images/screenshot/registration.png" width=270 ></td>
+    <td><img src="/images/screenshot/reset_password.png" width=270 ></td>
+    <td><img src="/images/screenshot/update_password.png" width=270 ></td>
+    <td><img src="/images/screenshot/home_page.png" width=270 ></td>
   </tr>
     <tr>
      <td>Category Product Search</td>
@@ -45,11 +45,11 @@
      <td>Shop Details</td>
     </tr>
     <tr>
-    <td><img src="/images/screenshots/category_products_searching.png" width=270 ></td>
-    <td><img src="/images/screenshots/featured_product_search.png" width=270 ></td>
-    <td><img src="/images/screenshots/product_details.png" width=270 ></td>
-    <td><img src="/images/screenshots/review_products.png" width=270 ></td>
-    <td><img src="/images/screenshots/shop_details.png" width=270 ></td>
+    <td><img src="/images/screenshot/category_products_searching.png" width=270 ></td>
+    <td><img src="/images/screenshot/featured_product_search.png" width=270 ></td>
+    <td><img src="/images/screenshot/product_details.png" width=270 ></td>
+    <td><img src="/images/screenshot/review_products.png" width=270 ></td>
+    <td><img src="/images/screenshot/shop_details.png" width=270 ></td>
     </tr>
 
  </table>
